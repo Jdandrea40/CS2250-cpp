@@ -6,19 +6,17 @@ using namespace std;
 // Displays intro message
 int Intro()
 {
-	int selectionChoice;
+	int selectionChoice;		// Variable which holds the selected option
 
 	// Intro Prompt
-	cout << "Welcome to the shape renderer!" << endl;
-	cout << "You can draw a few different shapes at a variety of sizes!" << endl;
 	cout << "********************************************************************************" << endl;
 	cout << "* Please select a menu option(1 - 6) :" << endl;
 	cout << "* 1 - Square" << endl;
 	cout << "* 2 - Right Triangle" << endl;
-	cout << "* 3 - Isoceles Triangle" << endl;
+	cout << "* 3 - Isosceles Triangle" << endl;
 	cout << "* 4 - Hourglass" << endl;
 	cout << "* 5 - Diamond" << endl;
-	cout << "* 6 - Quit (exit application)" << endl;
+	cout << "* 6 - Quit(exit the application)" << endl;
 	cout << "********************************************************************************" << endl;
 	cout << "Please select a menu option(1-6)" << endl;
 	cin >> selectionChoice;
@@ -26,7 +24,9 @@ int Intro()
 	// Loops to ensure a proper selection has been made
 	while (selectionChoice > 6 || selectionChoice <= 0)
 	{
+
 		cout << "You have not selected a valid menu option, please try again." << endl;
+		cout << "Please select a menu option(1-6)" << endl;
 		cin >> selectionChoice;
 	}
 
@@ -45,11 +45,16 @@ void Diamond(int& size, int& selectionChoice);
 // Main function to run Application
 int main()
 {
+	cout << "Welcome to the shape renderer!" << endl;
+	cout << "You can draw a few different shapes at a variety of sizes!" << endl;
 	// Intro StartUp
-	int selectionChoice = Intro();
-
-	// Shape Selection
-	ShapeSelection(selectionChoice);
+	int selectionChoice = 0;
+	while (selectionChoice != 6)
+	{
+		selectionChoice = Intro();
+		// Shape Selection
+		ShapeSelection(selectionChoice);
+	}
 
 	return 0;
 }
@@ -57,8 +62,7 @@ int main()
 // Function for choosing the desired shape
 int ShapeSelection(int& selectionChoice)
 {
-	// shape size variable
-	int size;
+	int size;		// shape size variable
 
 	// Switch case based on the user choice
 	switch (selectionChoice)
@@ -71,11 +75,11 @@ int ShapeSelection(int& selectionChoice)
 			while (size <= 0 || size > 20)
 			{
 				cout << "You have not selected an appropriate size, please try again." << endl;
-				cout << "Please give your desired size: " << endl;
+				cout << "You have selected a square!  What size should your square be (1-20)?" << endl;
 				cin >> size;
 			}
 			Square(size);
-			return size;
+			return 0;
 		}
 		// Case for ASCII Right Triangle
 		case 2:
@@ -85,11 +89,11 @@ int ShapeSelection(int& selectionChoice)
 			while (size <= 0 || size > 20)
 			{
 				cout << "You have not selected an appropriate size, please try again." << endl;
-				cout << "Please give your desired size: " << endl;
+				cout << "You have selected a right triangle!  What size should your right triangle be (1-20)?" << endl;
 				cin >> size;
 			}
 			RightTriangle(size);
-			return size;
+			return 0;
 		}
 		// Case for ASCII Isosceles Triangle
 		case 3:
@@ -99,11 +103,11 @@ int ShapeSelection(int& selectionChoice)
 			while (size <= 0 || size > 20)
 			{
 				cout << "You have not selected an appropriate size, please try again." << endl;
-				cout << "Please give your desired size: " << endl;
+				cout << "You have selected a isosceles triangle!  What size should your isosceles triangle be (1-20)?" << endl;
 				cin >> size;
 			}
 			IsoscelesTriangle(size, selectionChoice);
-			return size;
+			return 0;
 		}
 		// Case for ASCII HourGlass
 		case 4:
@@ -113,25 +117,25 @@ int ShapeSelection(int& selectionChoice)
 			while (size <= 0 || size > 20)
 			{
 				cout << "You have not selected an appropriate size, please try again." << endl;
-				cout << "Please give your desired size: " << endl;
+				cout << "You have selected an hourglass!  What size should your hourglass be (1-20)?" << endl;
 				cin >> size;
 			}
 			HourGlass(size, selectionChoice);
-			return size;
+			return 0;
 		}
 		// Case for ASCII Diamond
 		case 5:
 		{
-			cout << "You have selected a diamond!  What size should your diamond be (1-20)?" << endl;
+			cout << "You have selected an diamond!  What size should your diamond be (1-20)?" << endl;
 			cin >> size;
 			while (size <= 0 || size > 20)
 			{
 				cout << "You have not selected an appropriate size, please try again." << endl;
-				cout << "Please give your desired size: " << endl;
+				cout << "You have selected an diamond!  What size should your diamond be (1-20)?" << endl;
 				cin >> size;
 			}
 			Diamond(size, selectionChoice);
-			return size;
+			return 0;
 		}
 		// Quit Application
 		case 6:
@@ -155,11 +159,8 @@ void Square(int& size)
 			cout << "*";
 		}
 		cout << " " << endl;
-	}
-	cout << "********************************************************************************" << endl;
-
-	// restarts application
-	main();
+	}	
+	return;
 }
 
 // Function used for drawing Right Triangles
@@ -176,10 +177,8 @@ void RightTriangle(int& size)
 		}
 		cout << " " << endl;
 	}
-	cout << "********************************************************************************" << endl;
-
 	// restarts application
-	main();
+	return;
 
 }
 
@@ -187,12 +186,15 @@ void RightTriangle(int& size)
 // Takes in a size parameter and selection choice for function reusability
 void IsoscelesTriangle(int& size, int& selectionChoice)
 {
-	// allows for diamond reusability
-	int height = size;
-	// size - 1 so that an extra row is not printed in Diamond creation
-	if (selectionChoice == 5) { height = size - 1; }
+	int height = size;						// allows for diamond reusability
 
-	int baseLength = (size * 2) - 1;
+	// size - 1 so that an extra row is not printed in Diamond creation
+	if (selectionChoice == 5) 
+	{ 
+		height = size - 1;
+	}
+
+	int baseLength = (size * 2) - 1;		// stores the base length of the triangle
 
 	// The height of the triangle (i) is a constant height (size)
 	for (int i = 1; i <= height; i++)
@@ -214,24 +216,22 @@ void IsoscelesTriangle(int& size, int& selectionChoice)
 	}
 	if (selectionChoice == 3)
 	{
-		cout << "********************************************************************************" << endl;
-
-		// restarts application
-		main();
+		return;
 	}
 }
 // Function that draws an Hourglass
 // takes in size and selection choice for reusabilty in other functions
 void HourGlass(int& size, int& selectionChoice)
 {	
-	// a counter used for proper "*" position
-	int myCount = 0;
-	int baseLength = (size * 2) - 1;
+	int myCount = 0;						// a counter used for proper "*" position
+	int baseLength = (size * 2) - 1;		// store the base of the triangle
 	
 	// Allows for Diamond reusabilty
 	// size + 1 in order to draw the tip of the diamond
-	if (selectionChoice == 5) { size = size + 1; }
-
+	if (selectionChoice == 5) 
+	{ 
+		size = size + 1;
+	}
 	// The height of the triangle (i) is a constant height (size)
 	// to attached the regular Isosceles triangle to tip, size must lose 1 row 
 	for (int i = 1; i <= size - 1; i++)
@@ -254,10 +254,9 @@ void HourGlass(int& size, int& selectionChoice)
 	if (selectionChoice == 4)
 	{
 		IsoscelesTriangle(size, selectionChoice);
-		cout << "********************************************************************************" << endl;
 
 		// restarts application
-		main();
+		return;
 	}
 }
 // Function that draws a Diamond
@@ -270,9 +269,7 @@ void Diamond(int& size, int& selectionChoice)
 
 	// Hourglass = bottom (size is editted in Function to draw properly)
 	HourGlass(size, selectionChoice);
-
-	cout << "********************************************************************************" << endl;
 	
 	// restarts application
-	main();
+	return;
 }
