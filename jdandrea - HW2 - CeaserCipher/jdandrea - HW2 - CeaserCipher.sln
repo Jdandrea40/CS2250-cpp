@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jdandrea - HW2 - CeaserCipher", "jdandrea - HW2 - CeaserCipher\jdandrea - HW2 - CeaserCipher.vcxproj", "{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Debug|x64.ActiveCfg = Debug|x64
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Debug|x64.Build.0 = Debug|x64
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Debug|x86.ActiveCfg = Debug|Win32
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Debug|x86.Build.0 = Debug|Win32
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Release|x64.ActiveCfg = Release|x64
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Release|x64.Build.0 = Release|x64
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Release|x86.ActiveCfg = Release|Win32
+		{0FA95D69-5EC4-46CB-A437-5D8593C52DD7}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62CA1048-836A-4979-A4EC-AE2E6B1214BE}
+	EndGlobalSection
+EndGlobal
