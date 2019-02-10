@@ -6,7 +6,7 @@ using namespace std;
 // Function Prototypes
 int intro();
 string encryptionCheck();
-void decryptionCheck();
+string decryptionCheck();
 string encryptedMessage(string& message, int& shiftValue);
 string decryptedMessage(string& message, int& shiftValue);
 string bruteForceDecrypt(string& message);
@@ -14,13 +14,6 @@ string bruteForceDecrypt(string& message);
 // Main method to run application
 int main()
 {
-	// A65 a97  Z90 z122
-	//int z = 'z';
-	//int zz = 'Z';
-	//int a = 'A';
-	//int aa = 'a';
-	//cout << a << " " << aa << " " << " " << zz << " " << z << endl;
-
 	cout << "Welcome to the Tali-banned Encrypter!" << endl;
 	cout << "Make a selection from the menu and then follow the prompts." << endl;
 	int menuChoice = 0;
@@ -37,13 +30,13 @@ int main()
 		}
 		case 2:
 		{
-			decryptionCheck();
+			string decryptedMessage = decryptionCheck();
+			cout << "Decrypted as: \n" << decryptedMessage << endl;
 			break;
 		}
 		case 3:
 		{
 			string message;
-
 			cout << "Please enter the message to encrypt:" << endl;
 			cin.ignore();
 			getline(cin, message);
@@ -109,7 +102,7 @@ string encryptionCheck()
 
 }
 // Encryption case checkingand verifying
-void decryptionCheck()
+string decryptionCheck()
 {
 	string message;								// initialize message
 
@@ -129,7 +122,7 @@ void decryptionCheck()
 		cin >> shiftValue;
 	}
 
-	decryptedMessage(message, shiftValue);
+	return decryptedMessage(message, shiftValue);
 }
 // Function to encrypt a message
 string encryptedMessage(string& message, int& shiftValue)
@@ -182,16 +175,37 @@ string decryptedMessage(string& message, int& shiftValue)
 	for (int i = 0; i <= decryptedMessage.length(); i++)
 	{
 		char letter = decryptedMessage[i];
-		if (letter >= 'A' && letter <= 'z')
+		int shift = 1;
+		// Ensures that all special chars and spaces are not changed
+		// TEST: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ ,.?/!@#$%^&*()_+
+		if (letter >= 'A' && letter <= 'Z')
 		{
-			letter = letter - shiftValue;
-		}
+			while (shift <= shiftValue)
+			{
+				letter--;
+				if (letter < 'A')
+				{
+					letter = 'Z';
+				}
+				shift++;
 
+			}
+		}
+		else if (letter >= 'a' && letter <= 'z')
+		{
+			while (shift <= shiftValue)
+			{
+				letter--;
+				if (letter < 'a')
+				{
+					letter = 'z';
+				}
+				shift++;
+
+			}
+		}
 		decryptedMessage[i] = letter;
 	}
-
-	cout << decryptedMessage << endl;
-
 	return decryptedMessage;
 }
 
