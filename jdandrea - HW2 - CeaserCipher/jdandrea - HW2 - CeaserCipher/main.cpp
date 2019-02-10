@@ -7,6 +7,7 @@ using namespace std;
 int intro();
 string encryptionCheck();
 string decryptionCheck();
+string bruteForceCheck();
 string encryptedMessage(string& message, int& shiftValue);
 string decryptedMessage(string& message, int& shiftValue);
 string bruteForceDecrypt(string& message);
@@ -22,36 +23,32 @@ int main()
 	{	
 		switch (intro())
 		{
-		case 1:
-		{
-			string encryptedMessage = encryptionCheck();
-			cout << "Encrypted as: \n" << encryptedMessage << endl;
-			break;
-		}
-		case 2:
-		{
-			string decryptedMessage = decryptionCheck();
-			cout << "Decrypted as: \n" << decryptedMessage << endl;
-			break;
-		}
-		case 3:
-		{
-			string message;
-			cout << "Please enter the message to encrypt:" << endl;
-			cin.ignore();
-			getline(cin, message);
-			bruteForceDecrypt(message);
-		}
-		case 4:
-		{
-			cout << "Thank you Caesar!  See ya" << endl;
-			return 0;
-		}
+			case 1:
+			{
+				string encryptedMessage = encryptionCheck();
+				cout << "Encrypted as: \n" << encryptedMessage << endl;
+				break;
+			}
+			case 2:
+			{
+				string decryptedMessage = decryptionCheck();
+				cout << "Decrypted as: \n" << decryptedMessage << endl;
+				break;
+			}
+			case 3:
+			{
+				string bruteForceMessage = bruteForceCheck();
+				break;
+			}
+			case 4:
+			{
+				cout << "Thank you Caesar!  See ya" << endl;
+				return 0;
+			}
 		}
 	}
 	return 0;
 }
-
 // Displays an introduction message and menu
 int intro()
 {
@@ -124,6 +121,15 @@ string decryptionCheck()
 
 	return decryptedMessage(message, shiftValue);
 }
+string bruteForceCheck()
+{
+	string message;
+	cout << "Please enter the message to decrypt:" << endl;
+	cin.ignore();
+	getline(cin, message);
+	cout << "Decrypted as:" << endl;
+	return bruteForceDecrypt(message);	
+}
 // Function to encrypt a message
 string encryptedMessage(string& message, int& shiftValue)
 {
@@ -188,7 +194,6 @@ string decryptedMessage(string& message, int& shiftValue)
 					letter = 'Z';
 				}
 				shift++;
-
 			}
 		}
 		else if (letter >= 'a' && letter <= 'z')
@@ -211,32 +216,23 @@ string decryptedMessage(string& message, int& shiftValue)
 
 string bruteForceDecrypt(string& message)
 {
-	string decryptedMessage = message;
+	string bruteForceMessage;
 	int counter = 1;
 	int shiftValue = 1;
 
 	while (counter <= 25)
 	{
-		for (int i = 0; i <= decryptedMessage.length(); i++)
-		{
-			char letter = decryptedMessage[i];
-			if (letter >= 'A' && letter <= 'z')
-			{
-				letter = letter - shiftValue;
-			}
+		bruteForceMessage = decryptedMessage(message, shiftValue);
 
-			decryptedMessage[i] = letter;
-		}
-
-		if (counter == 1)
-		{
-			cout << "Decrypted as: " << endl;
-		}
-		
-		cout << decryptedMessage << endl;
+		//if (counter == 1)
+		//{
+		//	cout << "Decrypted as: " << endl;
+		//}
+		//
+		cout << bruteForceMessage << endl;
 
 		counter++;
 		shiftValue++;
 	}
-	return decryptedMessage;
+	return bruteForceMessage;
 }
