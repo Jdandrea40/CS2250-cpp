@@ -5,7 +5,7 @@ using namespace std;
 
 // Function Prototypes
 int intro();
-void encryptionCheck();
+string encryptionCheck();
 void decryptionCheck();
 string encryptedMessage(string& message, int& shiftValue);
 string decryptedMessage(string& message, int& shiftValue);
@@ -14,6 +14,12 @@ string bruteForceDecrypt(string& message);
 // Main method to run application
 int main()
 {
+	// A65 a97  Z90 z122
+	//int z = 'z';
+	//int zz = 'Z';
+	//int a = 'A';
+	//int aa = 'a';
+	//cout << a << " " << aa << " " << " " << zz << " " << z << endl;
 
 	cout << "Welcome to the Tali-banned Encrypter!" << endl;
 	cout << "Make a selection from the menu and then follow the prompts." << endl;
@@ -25,7 +31,8 @@ int main()
 		{
 		case 1:
 		{
-			encryptionCheck();
+			string encryptedMessage = encryptionCheck();
+			cout << "Encrypted as: \n" << encryptedMessage << endl;
 			break;
 		}
 		case 2:
@@ -78,7 +85,7 @@ int intro()
 }
 
 // Encryption case checkingand verifying
-void encryptionCheck()
+string encryptionCheck()
 {
 	string message;								// initialize message
 
@@ -98,7 +105,8 @@ void encryptionCheck()
 		cin >> shiftValue;
 	}
 
-	encryptedMessage(message, shiftValue);
+	return encryptedMessage(message, shiftValue);
+
 }
 // Encryption case checkingand verifying
 void decryptionCheck()
@@ -132,19 +140,38 @@ string encryptedMessage(string& message, int& shiftValue)
 	{
 		// stores the current letter as a char
 		char letter = encryptedMessage[i];
-
+		int shift = 1;
 		// Ensures that all special chars and spaces are not changed
-		if (letter >= 'A' && letter <= 'z')
+		// TEST: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ ,.?/!@#$%^&*()_+
+		if (letter >= 'A' && letter <= 'Z')
 		{
-			// shifts the current letter by the appropriate value
-			letter = letter + shiftValue;
+			while (shift <= shiftValue)
+			{
+				letter++;
+				if (letter > 'Z')
+				{
+					letter = 'A';
+				}
+				shift++;
+
+			}
+		}
+		else if (letter >= 'a' && letter <= 'z')
+		{
+			while (shift <= shiftValue)
+			{
+				letter++;
+				if (letter > 'z')
+				{
+					letter = 'a';
+				}
+				shift++;
+
+			}
 		}
 		// replaces the orginal letter with encrypted letter
 		encryptedMessage[i] = letter;
 	}
-
-	cout << encryptedMessage << endl;
-
 	return encryptedMessage;
 }
 
