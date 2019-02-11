@@ -7,10 +7,10 @@ using namespace std;
 int intro();
 string encryptionCheck();
 string decryptionCheck();
-string bruteForceCheck();
-string encryptedMessage(const string& message, int& shiftValue);
-string decryptedMessage(const string& message, int& shiftValue);
-string bruteForceDecrypt(const string& message);
+void bruteForceCheck();
+string encryptedMessage(string& message, int& shiftValue);
+string decryptedMessage(string& message, int& shiftValue);
+void bruteForceDecrypt(string& message);
 
 // Main method to run application
 int main()
@@ -18,7 +18,8 @@ int main()
 	// Prints a one time intro message
 	cout << "Welcome to the Tali-banned Encrypter!" << endl;
 	cout << "Make a selection from the menu and then follow the prompts." << endl;
-	int menuChoice = 0;
+
+	int menuChoice = 0;						// initialization of menu selection
 
 	while (menuChoice < 5)
 	{	
@@ -42,7 +43,7 @@ int main()
 			// Brute Force a message (25 different decryptions)
 			case 3:
 			{
-				string bruteForceMessage = bruteForceCheck();
+				bruteForceCheck();
 				break;
 			}
 			// exit case
@@ -78,18 +79,19 @@ int intro()
 	// returns the menu choice for switch statement in main
 	return menuChoice;
 }
-
 // Encryption case checking and verifying
 string encryptionCheck()
 {
 	string message;								// initialize message
-	// Propt messages
+	
+	// Message prompts
 	cout << "Please enter the message to encrypt:" << endl;
 	cin.ignore();
 	getline(cin, message);
 
 	cout << "Please enter the shift value (1-25):" << endl;
 	int shiftValue = 0;
+
 	// takes in shift value
 	cin >> shiftValue;
 
@@ -103,11 +105,12 @@ string encryptionCheck()
 	return encryptedMessage(message, shiftValue);
 
 }
-// Encryption case checkingand verifying
+// Encryption case checking and verifying
 string decryptionCheck()
 {
 	string message;								// initialize message
 
+	// Message Prompts
 	cout << "Please enter the message to decrypt:" << endl;;
 	cin.ignore();
 	getline(cin, message);
@@ -126,113 +129,108 @@ string decryptionCheck()
 
 	return decryptedMessage(message, shiftValue);
 }
-// 
-string bruteForceCheck()
+// Checks and passes message to brute force decryption
+void bruteForceCheck()
 {
-	string message;
+	string message;						//message initialization
+
+	// Prompt and read in
 	cout << "Please enter the message to decrypt:" << endl;
 	cin.ignore();
 	getline(cin, message);
+
 	cout << "Decrypted as:" << endl;
-	return bruteForceDecrypt(message);	
+
+	bruteForceDecrypt(message);	
 }
 // Function to encrypt a message
-string encryptedMessage(const string& message, int& shiftValue)
+string encryptedMessage(string& message, int& shiftValue)
 {
-	string encryptedMessage = message;				// stores the original message
-
-	for (int i = 0; i <= encryptedMessage.length(); i++)
+	for (int i = 0; i <= message.length(); i++)
 	{
+		int letterShift = 0;
+
 		// stores the current letter as a char
-		char letter = encryptedMessage[i];
-		int shift = 1;
+		char letter = message[i];
+
 		// Ensures that all special chars and spaces are not changed
-		// TEST: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ ,.?/!@#$%^&*()_+
 		if (letter >= 'A' && letter <= 'Z')
 		{
-			while (shift <= shiftValue)
+			// stores the shifted letter value seperately to avoid,
+			// improper letter wrapping
+			letterShift = letter + shiftValue;
+			if (letterShift > 'Z')
 			{
-				letter++;
-				if (letter > 'Z')
-				{
-					letter = 'A';
-				}
-				shift++;
-
+				letterShift -= 26;
 			}
+			letter = letterShift;
 		}
 		else if (letter >= 'a' && letter <= 'z')
 		{
-			while (shift <= shiftValue)
+			letterShift = letter + shiftValue;
+			if (letterShift > 'z')
 			{
-				letter++;
-				if (letter > 'z')
-				{
-					letter = 'a';
-				}
-				shift++;
-
+				letterShift -= 26;
 			}
+			letter = letterShift;
+
 		}
 		// replaces the orginal letter with encrypted letter
-		encryptedMessage[i] = letter;
+		message[i] = letter;
 	}
-	return encryptedMessage;
+	return message;
 }
-
-string decryptedMessage(const string& message, int& shiftValue)
+// Function for message decryption
+string decryptedMessage(string& message, int& shiftValue)
 {
-	string decryptedMessage = message;
-
-	for (int i = 0; i <= decryptedMessage.length(); i++)
+	for (int i = 0; i <= message.length(); i++)
 	{
-		char letter = decryptedMessage[i];
-		int shift = 1;
+		char letter = message[i];
+		int letterShift = 0;
+
 		// Ensures that all special chars and spaces are not changed
-		// TEST: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ ,.?/!@#$%^&*()_+
 		if (letter >= 'A' && letter <= 'Z')
 		{
-			while (shift <= shiftValue)
+			letterShift = letter - shiftValue;
+			if (letterShift < 'A')
 			{
-				letter--;
-				if (letter < 'A')
-				{
-					letter = 'Z';
-				}
-				shift++;
+				letterShift += 26;
 			}
+			letter = letterShift;
 		}
+		// Ensures that all special chars and spaces are not changed
 		else if (letter >= 'a' && letter <= 'z')
 		{
-			while (shift <= shiftValue)
+			// Stores the adjusted 
+			letterShift = letter - shiftValue;
+			if (letterShift < 'a')
 			{
-				letter--;
-				if (letter < 'a')
-				{
-					letter = 'z';
-				}
-				shift++;
+				letterShift += 26;
 			}
+			letter = letterShift;
 		}
-		decryptedMessage[i] = letter;
+		message[i] = letter;
 	}
-	return decryptedMessage;
+
+	return message;
 }
-
-string bruteForceDecrypt(const string& message)
+// Decrypts the message 25 times
+void bruteForceDecrypt(string& message)
 {
-	string bruteForceMessage;
-	int counter = 1;
-	int shiftValue = 1;
+	string bruteForceMessage;				// message initialization
 
+	int counter = 1;
+	int shiftValue = 1; 
+
+	// ensure 25 messages are attempted
 	while (counter <= 25)
 	{
+		// reuses the drcrypt message function
 		bruteForceMessage = decryptedMessage(message, shiftValue);
 
+		// prints the message
 		cout << bruteForceMessage << endl;
 
 		counter++;
-		shiftValue++;
 	}
-	return bruteForceMessage;
 }
