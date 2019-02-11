@@ -8,38 +8,44 @@ int intro();
 string encryptionCheck();
 string decryptionCheck();
 string bruteForceCheck();
-string encryptedMessage(string& message, int& shiftValue);
-string decryptedMessage(string& message, int& shiftValue);
-string bruteForceDecrypt(string& message);
+string encryptedMessage(const string& message, int& shiftValue);
+string decryptedMessage(const string& message, int& shiftValue);
+string bruteForceDecrypt(const string& message);
 
 // Main method to run application
 int main()
 {
+	// Prints a one time intro message
 	cout << "Welcome to the Tali-banned Encrypter!" << endl;
 	cout << "Make a selection from the menu and then follow the prompts." << endl;
 	int menuChoice = 0;
 
 	while (menuChoice < 5)
 	{	
+		// Switch case based from intro selection
 		switch (intro())
 		{
+			// Encrypt a Message
 			case 1:
 			{
 				string encryptedMessage = encryptionCheck();
 				cout << "Encrypted as: \n" << encryptedMessage << endl;
 				break;
 			}
+			// Decrypt a Message
 			case 2:
 			{
 				string decryptedMessage = decryptionCheck();
 				cout << "Decrypted as: \n" << decryptedMessage << endl;
 				break;
 			}
+			// Brute Force a message (25 different decryptions)
 			case 3:
 			{
 				string bruteForceMessage = bruteForceCheck();
 				break;
 			}
+			// exit case
 			case 4:
 			{
 				cout << "Thank you Caesar!  See ya" << endl;
@@ -62,39 +68,38 @@ int intro()
 	cout << "*************************************" << endl;
 	cout << "Please make a menu selection (1-4):" << endl;
 
-
+	// takes in menu selection and ensures proper input
 	cin >> menuChoice;
 	while (menuChoice < 1 || menuChoice > 4)
 	{
-		cout << "Please make a menu selection (1-4):" << endl;
 		cout << "Invalid choice, Please make a menu selection (1-4):" << endl;
 		cin >> menuChoice;
 	}
-
+	// returns the menu choice for switch statement in main
 	return menuChoice;
 }
 
-// Encryption case checkingand verifying
+// Encryption case checking and verifying
 string encryptionCheck()
 {
 	string message;								// initialize message
-
-	cout << "Please enter the message to encrypt:";
+	// Propt messages
+	cout << "Please enter the message to encrypt:" << endl;
 	cin.ignore();
 	getline(cin, message);
 
-	cout << "Please enter the shift value (1-25):";
+	cout << "Please enter the shift value (1-25):" << endl;
 	int shiftValue = 0;
-
+	// takes in shift value
 	cin >> shiftValue;
 
-
+	// ensures proper input
 	while (shiftValue > 25 || shiftValue < 1)
 	{
-		cout << "Invalid choice, Please enter the shift value (1-25):";
+		cout << "Invalid choice, Please enter the shift value (1-25):" << endl;
 		cin >> shiftValue;
 	}
-
+	// returns the ecrypted message for printing later
 	return encryptedMessage(message, shiftValue);
 
 }
@@ -103,16 +108,16 @@ string decryptionCheck()
 {
 	string message;								// initialize message
 
-	cout << "Please enter the message to decrypt:";
+	cout << "Please enter the message to decrypt:" << endl;;
 	cin.ignore();
 	getline(cin, message);
 
-	cout << "Please enter the shift value (1-25):";
+	cout << "Please enter the shift value (1-25):" << endl;
 	int shiftValue = 0;
 
 	cin >> shiftValue;
 
-
+	// ensures proper input
 	while (shiftValue > 25 || shiftValue < 1)
 	{
 		cout << "Invalid choice, Please enter the shift value (1-25):";
@@ -121,6 +126,7 @@ string decryptionCheck()
 
 	return decryptedMessage(message, shiftValue);
 }
+// 
 string bruteForceCheck()
 {
 	string message;
@@ -131,7 +137,7 @@ string bruteForceCheck()
 	return bruteForceDecrypt(message);	
 }
 // Function to encrypt a message
-string encryptedMessage(string& message, int& shiftValue)
+string encryptedMessage(const string& message, int& shiftValue)
 {
 	string encryptedMessage = message;				// stores the original message
 
@@ -174,7 +180,7 @@ string encryptedMessage(string& message, int& shiftValue)
 	return encryptedMessage;
 }
 
-string decryptedMessage(string& message, int& shiftValue)
+string decryptedMessage(const string& message, int& shiftValue)
 {
 	string decryptedMessage = message;
 
@@ -206,7 +212,6 @@ string decryptedMessage(string& message, int& shiftValue)
 					letter = 'z';
 				}
 				shift++;
-
 			}
 		}
 		decryptedMessage[i] = letter;
@@ -214,7 +219,7 @@ string decryptedMessage(string& message, int& shiftValue)
 	return decryptedMessage;
 }
 
-string bruteForceDecrypt(string& message)
+string bruteForceDecrypt(const string& message)
 {
 	string bruteForceMessage;
 	int counter = 1;
@@ -224,11 +229,6 @@ string bruteForceDecrypt(string& message)
 	{
 		bruteForceMessage = decryptedMessage(message, shiftValue);
 
-		//if (counter == 1)
-		//{
-		//	cout << "Decrypted as: " << endl;
-		//}
-		//
 		cout << bruteForceMessage << endl;
 
 		counter++;

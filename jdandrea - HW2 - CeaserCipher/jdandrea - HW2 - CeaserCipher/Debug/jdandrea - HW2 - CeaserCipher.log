@@ -1,4 +1,4 @@
 ﻿  main.cpp
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw2 - ceasercipher\jdandrea - hw2 - ceasercipher\main.cpp(140): warning C4018: '<=': signed/unsigned mismatch
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw2 - ceasercipher\jdandrea - hw2 - ceasercipher\main.cpp(183): warning C4018: '<=': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw2 - ceasercipher\jdandrea - hw2 - ceasercipher\main.cpp(138): warning C4018: '<=': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw2 - ceasercipher\jdandrea - hw2 - ceasercipher\main.cpp(181): warning C4018: '<=': signed/unsigned mismatch
   jdandrea - HW2 - CeaserCipher.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW2 - CeaserCipher\Debug\jdandrea - HW2 - CeaserCipher.exe
