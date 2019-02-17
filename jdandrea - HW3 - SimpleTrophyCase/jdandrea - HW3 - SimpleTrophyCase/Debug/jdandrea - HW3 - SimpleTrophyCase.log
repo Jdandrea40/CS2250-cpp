@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(189): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(273): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(338): warning C4018: '<': signed/unsigned mismatch
+  jdandrea - HW3 - SimpleTrophyCase.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW3 - SimpleTrophyCase\Debug\jdandrea - HW3 - SimpleTrophyCase.exe
