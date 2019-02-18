@@ -10,48 +10,42 @@ using namespace std;
 Trophy::Trophy(const string& name, int& level, Color color) :
 	m_name(name), m_level(level), m_color(color)
 {
-	//vector<Trophy> trophy;
-	setName(name);
-	setLevel(level);
-	setColor(color);
+	switch (color)
+	{
+	case GOLD:
+	{
+		m_name = name;
+		m_level = level;
+		m_color = GOLD;
 
-	//trophy.push_back(Trophy(m_name, m_level, m_color));
-	//switch (color)
-	//{
-	//case GOLD:
-	//{
-	//	m_name = name;
-	//	m_level = level;
-	//	m_color = GOLD;
+		break;
+	}
+	case SILVER:
+	{
+		m_name = name;
+		m_level = level;
+		m_color = SILVER;
 
-	//	break;
-	//}
-	//case SILVER:
-	//{
-	//	m_name = name;
-	//	m_level = level;
-	//	m_color = SILVER;
+		break;
+	}
+	case BRONZE:
+	{
+		m_name = name;
+		m_level = level;
+		m_color = BRONZE;
 
-	//	break;
-	//}
-	//case BRONZE:
-	//{
-	//	m_name = name;
-	//	m_level = level;
-	//	m_color = BRONZE;
+		break;
+	}
+	default:
+	{
+		m_name = "DEFAULT";
+		m_level = 1;
+		m_color = BRONZE;
 
-	//	break;
-	//}
-	//default:
-	//{
-	//	m_name = "DEFAULT";
-	//	m_level = 1;
-	//	m_color = BRONZE;
+		break;
+	}
 
-	//	break;
-	//}
-
-	//}
+	}
 
 }
 string Trophy::getName()
@@ -80,7 +74,25 @@ void Trophy::setColor(Color color)
 {
 	m_color = color;
 }
-void Trophy::print(const string& name, int& level, Color color)
+void Trophy::printTrophies(Color color)
 {
-	cout << "[ " << name << " : " << level << " : " << color << " ]" << endl;
+
+	switch (color)
+	{
+		case GOLD:
+		{
+			cout << "[ " << m_name << " : " << m_level << " :  GOLD  ]" << endl;
+			break;
+		}
+		case SILVER:
+		{
+			cout << "[ " << m_name << " : " << m_level << " :  SILVER  ]" << endl;
+			break;
+		}
+		case BRONZE:
+		{
+			cout << "[ " << m_name << " : " << m_level << " :  BRONZE  ]" << endl;
+			break;
+		}
+	}
 }

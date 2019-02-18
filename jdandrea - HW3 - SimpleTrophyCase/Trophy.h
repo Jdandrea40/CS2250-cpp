@@ -24,7 +24,7 @@ public:
 	void setName(const std::string& name);
 	void setLevel(int& level);
 	void setColor(Color color);
-	void print(const std::string& name, int& level, Color color);
+	void printTrophies(Color color);
 
 private:
 	std::string m_name;
