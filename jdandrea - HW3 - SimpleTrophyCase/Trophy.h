@@ -1,22 +1,24 @@
-// TODO: Guard the header
+// Guards the header
 #ifndef TROPHY_H
 #define TROPHY_H
 
-// TODO: include the libraries this class will need
+// include the libraries this class will need
 #include <string>
 #include <vector>
 
-
+// enumerations of trophy colors
 enum Color
 {
 	GOLD,
 	SILVER,
 	BRONZE
 
-};		// TODO: create the color values
+};
+// Defines the Trophy class
 class Trophy
 {
 public:
+	Trophy();
 	Trophy(const std::string& name, int& level, Color color);
 	std::string getName();
 	int getLevel();
@@ -24,15 +26,13 @@ public:
 	void setName(const std::string& name);
 	void setLevel(int& level);
 	void setColor(Color color);
-	void printTrophies(Color color);
+	void printTrophies();
 
 private:
 	std::string m_name;
 	int m_level;
 	Color m_color;
-	//vector<Trophy> trophy;
-};	// TODO: complete the Trophy class
 
-// TODO: end the guard
+};
 
 #endif // !TROPHY_H

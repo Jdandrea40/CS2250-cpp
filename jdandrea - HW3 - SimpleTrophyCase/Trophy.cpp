@@ -1,4 +1,4 @@
-// TODO: implement the Trophy class
+// implement the Trophy class
 #include "Trophy.h"
 #include <iostream>
 #include <string>
@@ -6,89 +6,67 @@
 
 using namespace std;
 
+// Default constructor to intialie safe values
+Trophy::Trophy()
+{
+	m_name = "DefaultTrophy";
+	m_level = 0;
+	m_color = BRONZE;
+};
 
 Trophy::Trophy(const string& name, int& level, Color color) :
 	m_name(name), m_level(level), m_color(color)
-{
-	switch (color)
-	{
-	case GOLD:
-	{
-		m_name = name;
-		m_level = level;
-		m_color = GOLD;
+{ }
 
-		break;
-	}
-	case SILVER:
-	{
-		m_name = name;
-		m_level = level;
-		m_color = SILVER;
-
-		break;
-	}
-	case BRONZE:
-	{
-		m_name = name;
-		m_level = level;
-		m_color = BRONZE;
-
-		break;
-	}
-	default:
-	{
-		m_name = "DEFAULT";
-		m_level = 1;
-		m_color = BRONZE;
-
-		break;
-	}
-
-	}
-
-}
+// Gets the private data (NAME) of the trophy
 string Trophy::getName()
 {
 	return m_name;
 }
+// Gets the private data (LEVEL) of the trophy
 int Trophy::getLevel() 
 {
 	return m_level;
 }
-// Sets a string value to the proper enumeration type
-// returns the proper name
+// Gets the private data (COLOR) of the trophy
 Color Trophy::getColor()
 {
 	return m_color;
 }
+// Sets the name of the trophy
 void Trophy::setName(const string& name)
 {
 	m_name = name;
 }
+// Sets the level of the trophy
 void Trophy::setLevel(int& level)
 {
 	m_level = level;
 }
+// Sets the color of the trophy
 void Trophy::setColor(Color color)
 {
 	m_color = color;
 }
-void Trophy::printTrophies(Color color)
+// Prints the trophies
+void Trophy::printTrophies()
 {
-
-	switch (color)
+	// Switches what is printed based on the enumeration of the trophy
+	switch (m_color)
 	{
+		// GOLD trophy printing
 		case GOLD:
 		{
 			cout << "[ " << m_name << " : " << m_level << " :  GOLD  ]" << endl;
 			break;
 		}
+		// SILVER trophy printing
 		case SILVER:
 		{
 			cout << "[ " << m_name << " : " << m_level << " :  SILVER  ]" << endl;
 			break;
 		}
+		// Brone trophy printing
 		case BRONZE:
 		{
 			cout << "[ " << m_name << " : " << m_level << " :  BRONZE  ]" << endl;
