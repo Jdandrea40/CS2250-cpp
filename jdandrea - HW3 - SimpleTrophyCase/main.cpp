@@ -122,9 +122,8 @@ void addTrophy(vector<Trophy>& trophy)
 void deleteTrophy(vector<Trophy>& trophies)
 {
 	cout << "You have chosen to delete an existing trophy." << endl;
+	vector<Trophy>::iterator it = trophies.begin();
 
-	
-	
 	int deletedTrophy = searchForTrophy(trophies);
 	if (deletedTrophy == -1)
 	{
@@ -132,6 +131,14 @@ void deleteTrophy(vector<Trophy>& trophies)
 	}
 	else
 	{
+		while (it != trophies.end())
+		{
+			++it;
+		}
+		if (it != trophies.end)
+		{
+			trophies.erase;
+		}
 	}
 	// TODO: Find the trophy and if it exists, erase it to the vector
 }
@@ -140,6 +147,7 @@ void deleteTrophy(vector<Trophy>& trophies)
 void copyTrophy(vector<Trophy>& trophy)
 {
 	cout << "You have chosen to copy an existing trophy." << endl;
+
 
 	int copiedTrophy = searchForTrophy(trophy);						// searches vector for a trophy name
 
