@@ -20,6 +20,8 @@ class Trophy
 public:
 	Trophy();
 	Trophy(const std::string& name, int& level, Color color);
+	~Trophy();
+	Trophy& operator=(const Trophy& trophy);
 	std::string getName();
 	int getLevel();
 	Color getColor();
@@ -29,9 +31,9 @@ public:
 	void printTrophies();
 
 private:
-	std::string m_name;
-	int m_level;
-	Color m_color;
+	std::string* m_name;
+	int* m_level;
+	Color* m_color;
 
 };
 

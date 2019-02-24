@@ -1,7 +1,57 @@
-﻿  Trophy.cpp
-  main.cpp
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(281): warning C4018: '<': signed/unsigned mismatch
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(352): warning C4018: '<': signed/unsigned mismatch
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(415): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  jdandrea - HW3 - SimpleTrophyCase.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW3 - SimpleTrophyCase\Debug\jdandrea - HW3 - SimpleTrophyCase.exe
+﻿  main.cpp
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(114): warning C4101: 'e': unreferenced local variable
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(144): error C2664: 'int searchForTrophy(std::vector<Trophy *,std::allocator<_Ty>> &,std::string &)': cannot convert argument 1 from 'std::vector<Trophy,std::allocator<_Ty>>' to 'std::vector<Trophy *,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=Trophy *
+          ]
+          and
+          [
+              _Ty=Trophy
+          ]
+          and
+          [
+              _Ty=Trophy *
+          ]
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(203): error C2664: 'int searchForTrophy(std::vector<Trophy *,std::allocator<_Ty>> &,std::string &)': cannot convert argument 1 from 'std::vector<Trophy,std::allocator<_Ty>>' to 'std::vector<Trophy *,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=Trophy *
+          ]
+          and
+          [
+              _Ty=Trophy
+          ]
+          and
+          [
+              _Ty=Trophy *
+          ]
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(237): error C2664: 'int searchForTrophy(std::vector<Trophy *,std::allocator<_Ty>> &,std::string &)': cannot convert argument 1 from 'std::vector<Trophy,std::allocator<_Ty>>' to 'std::vector<Trophy *,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=Trophy *
+          ]
+          and
+          [
+              _Ty=Trophy
+          ]
+          and
+          [
+              _Ty=Trophy *
+          ]
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(270): error C2664: 'int searchForTrophy(std::vector<Trophy *,std::allocator<_Ty>> &,std::string &)': cannot convert argument 1 from 'std::vector<Trophy,std::allocator<_Ty>>' to 'std::vector<Trophy *,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=Trophy *
+          ]
+          and
+          [
+              _Ty=Trophy
+          ]
+          and
+          [
+              _Ty=Trophy *
+          ]
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(305): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(397): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(460): warning C4018: '<': signed/unsigned mismatch
