@@ -9,10 +9,18 @@ using namespace std;
 // Default constructor to intialize safe values
 Trophy::Trophy()
 {
-	*m_name = "";
-	*m_level = 0;
-	*m_color = BRONZE;
-};
+	m_name = new string("");
+	m_level = new int(0);
+	m_color = new Color(BRONZE);
+}
+// copy constructor
+Trophy::Trophy(const Trophy& trophy)
+{
+	m_name = new string(*trophy.m_name);
+	m_level = new int(*trophy.m_level);
+	m_color = new Color(*trophy.m_color);
+
+}
 // Trophy Constructor
 Trophy::Trophy(const string& name, int& level, Color color)
 {
@@ -50,7 +58,7 @@ string Trophy::getName()
 	return *m_name;
 }
 // Gets the private data (LEVEL) of the trophy
-int Trophy::getLevel() 
+int Trophy::getLevel()
 {
 	return *m_level;
 }
@@ -81,22 +89,22 @@ void Trophy::printTrophies()
 	switch (*m_color)
 	{
 		// GOLD trophy printing
-		case GOLD:
-		{
-			cout << "[ " << m_name << " : " << m_level << " :  GOLD  ]" << endl;
-			break;
-		}
-		// SILVER trophy printing
-		case SILVER:
-		{
-			cout << "[ " << m_name << " : " << m_level << " :  SILVER  ]" << endl;
-			break;
-		}
-		// Bronze trophy printing
-		case BRONZE:
-		{
-			cout << "[ " << m_name << " : " << m_level << " :  BRONZE  ]" << endl;
-			break;
-		}
+	case GOLD:
+	{
+		cout << "[ " << *m_name << " : " << *m_level << " :  GOLD  ]" << endl;
+		break;
+	}
+	// SILVER trophy printing
+	case SILVER:
+	{
+		cout << "[ " << *m_name << " : " << *m_level << " :  SILVER  ]" << endl;
+		break;
+	}
+	// Bronze trophy printing
+	case BRONZE:
+	{
+		cout << "[ " << *m_name << " : " << *m_level << " :  BRONZE  ]" << endl;
+		break;
+	}
 	}
 }

@@ -28,7 +28,7 @@ Color promptForColor(const string& message);
 
 // Useful helper methods
 string stringToUpper(string& value);
-int searchForTrophy(vector<Trophy*>& trophy,string& name);
+int searchForTrophy(vector<Trophy*>& trophy, string& name);
 
 // This application allows for the management of a trophy collection
 int main()
@@ -80,6 +80,11 @@ int main()
 
 	} while (input != 8);
 
+	// Deletes all trophies when application closes
+	for (int i = trophies.size() - 1; i >= 0; i--)
+	{
+		delete trophies[i];
+	}
 	return 0;
 }
 
@@ -111,7 +116,7 @@ int printMenu()
 		// converts it to an int
 		input = stoi(inputString);
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
 		// will return an invalid option
 		return -1;
@@ -126,7 +131,7 @@ void addTrophy(vector<Trophy*>& trophy)
 {
 	// prompt for trophy creation
 	cout << "You have chosen to add a trophy." << endl;
-	Trophy* newTrophy = new Trophy(*promptForTrophy());						// creates a new trophy
+	Trophy* newTrophy = promptForTrophy();						// creates a new trophy
 
 	// adds the new trophy to the vector
 	trophy.push_back(newTrophy);
@@ -135,7 +140,7 @@ void addTrophy(vector<Trophy*>& trophy)
 // Delete an existing Trophy from the collection
 // by comparing the m_name of the iterators position
 // to a given vector locations m_name
-void deleteTrophy(vector<Trophy>& trophies)
+void deleteTrophy(vector<Trophy*>& trophies)
 {
 	// Prompt for delting trophy
 	cout << "You have chosen to delete an existing trophy." << endl;
@@ -151,13 +156,13 @@ void deleteTrophy(vector<Trophy>& trophies)
 	// if found, iterate through vector
 	// erase the matching trophy
 	else
-	{	
-		vector<Trophy>::iterator it = trophies.begin();					// iterator for searching
+	{
+		vector<Trophy*>::iterator it = trophies.begin();					// iterator for searching
 
 		// so long as the iterator isn't at the end of the vecotr
 		// and its current name is not the same as the searched name
 		// continue searching
-		while (it != trophies.end() && it->getName() != trophies[deletedTrophy].getName())
+		while (it != trophies.end() && (*it)->getName() != trophies[deletedTrophy]->getName())
 		{
 			++it;
 		}
@@ -165,6 +170,7 @@ void deleteTrophy(vector<Trophy>& trophies)
 		// not due to reaching the end of the vector
 		if (it != trophies.end())
 		{
+			delete(*it);
 			// delete its position
 			trophies.erase(it);
 		}
@@ -176,6 +182,7 @@ void deleteTrophy(vector<Trophy>& trophies)
 // and pushing the same values back into the vector
 void copyTrophy(vector<Trophy*>& trophy)
 {
+	Trophy* trophyToCopy = NULL;
 	cout << "You have chosen to copy an existing trophy." << endl;
 	string name = promptForString(PROMPT_FOR_NAME);							// the name of the copies trophy
 	int copiedTrophy = searchForTrophy(trophy, name);						// searches vector for a trophy name
@@ -189,7 +196,8 @@ void copyTrophy(vector<Trophy*>& trophy)
 	// if it exists, duplicate it into the vector
 	else
 	{
-		trophy.push_back(trophy[copiedTrophy]);
+		trophyToCopy = new Trophy(*trophy[copiedTrophy]);
+		trophy.push_back(trophyToCopy);
 	}
 }
 
@@ -212,9 +220,9 @@ void renameTrophy(vector<Trophy*>& trophies)
 	else
 	{
 		vector<Trophy*>::iterator it = trophies.begin();				// iterator for vector searching (pointer)
-		
+
 		// loops through Trophies until there is a matched name
-		while (it != trophies.end() && it->getName() != trophies[renameTrophy].getName())
+		while (it != trophies.end() && (*it)->getName() != trophies[renameTrophy]->getName())
 		{
 			++it;
 		}
@@ -222,14 +230,14 @@ void renameTrophy(vector<Trophy*>& trophies)
 		if (it != trophies.end())
 		{
 			// sets the new name
-			it->setName(newName);
+			(*it)->setName(newName);
 		}
 	}
 }
 
 // Relevel an existing Trophy (change the m_level)
 // by searching for a given m_name
-void relevelTrophy(vector<Trophy>& trophies)
+void relevelTrophy(vector<Trophy*>& trophies)
 {
 	// Prompt for releveling of trophies
 	cout << "You have chosen to change the level of an existing trophy." << endl;
@@ -245,10 +253,10 @@ void relevelTrophy(vector<Trophy>& trophies)
 	// if found, iterates through and changes the level
 	else
 	{
-		vector<Trophy>::iterator it = trophies.begin();				// iterator for vector searching (pointer)
+		vector<Trophy*>::iterator it = trophies.begin();				// iterator for vector searching (pointer)
 
 		// loops through Trophies until there is a matched name
-		while (it != trophies.end() && it->getName() != trophies[relevelTrophy].getName())
+		while (it != trophies.end() && (*it)->getName() != trophies[relevelTrophy]->getName())
 		{
 			++it;
 		}
@@ -256,14 +264,14 @@ void relevelTrophy(vector<Trophy>& trophies)
 		if (it != trophies.end())
 		{
 			// sets new level
-			it->setLevel(newLevel);
+			(*it)->setLevel(newLevel);
 		}
 	}
 }
 
 // Recolor an existing Trophy (change the m_color)
 // of a given m_name
-void recolorTrophy(vector<Trophy>& trophies)
+void recolorTrophy(vector<Trophy*>& trophies)
 {
 	cout << "You have chosen to change the color of an existing trophy." << endl;
 	string name = promptForString(PROMPT_FOR_NAME);					// name if the searched trophy
@@ -278,10 +286,10 @@ void recolorTrophy(vector<Trophy>& trophies)
 	// if found, iterates through and changes the color
 	else
 	{
-		vector<Trophy>::iterator it = trophies.begin();				// iterator for vector searching (pointer)
+		vector<Trophy*>::iterator it = trophies.begin();				// iterator for vector searching (pointer)
 
 		// loops through Trophies until there is a matched name
-		while (it != trophies.end() && it->getName() != trophies[recolorTrophy].getName())
+		while (it != trophies.end() && (*it)->getName() != trophies[recolorTrophy]->getName())
 		{
 			++it;
 		}
@@ -289,14 +297,14 @@ void recolorTrophy(vector<Trophy>& trophies)
 		if (it != trophies.end())
 		{
 			// sets new color
-			it->setColor(newColor);
+			(*it)->setColor(newColor);
 		}
 	}
 }
 
 // Print all of the Trophies in the collection
 // by using a for loop to iterate through the vector
-void printTrophies(vector<Trophy>& trophies)
+void printTrophies(vector<Trophy*>& trophies)
 {
 	// prompt for printing
 	cout << "You have chosen to print all of the trophies." << endl;
@@ -304,7 +312,7 @@ void printTrophies(vector<Trophy>& trophies)
 	// Prints all the trophies in the order they are stored in the vector
 	for (int i = 0; i < trophies.size(); i++)
 	{
-		trophies[i].printTrophies();
+		trophies[i]->printTrophies();
 	}
 }
 
@@ -318,10 +326,10 @@ Trophy* promptForTrophy()
 	Color color = promptForColor(PROMPT_FOR_COLOR);					// color of trophy
 
 	// Creates a new trophy with the above info
-	Trophy newTrophy = Trophy::Trophy(name, level, color);
+	Trophy* newTrophy = new Trophy(name, level, color);
 
 	// Return a Trophy
-	return new Trophy(newTrophy);
+	return newTrophy;
 }
 
 // Ask the user for a string, validate their response
@@ -335,7 +343,7 @@ string promptForString(const string& message)
 	getline(cin, value);
 
 	// validity check / error message
-	while(value == "")
+	while (value == "")
 	{
 		cout << "That is not a valid name.  Try again.";
 		getline(cin, value);
@@ -363,7 +371,7 @@ int promptForInt(const string& message, int minimum, int maximum)
 		// converts in to int
 		value = stoi(valueString);
 	}
-	catch(exception& e)
+	catch (exception& e)
 	{
 		// makes inproper input a negatve value
 		value = -1;
@@ -418,10 +426,10 @@ Color promptForColor(const string& message)
 	cout << message << endl;
 	// while the color is not acceptable
 	while (value != "GOLD" || value != "SILVER" || value != "BRONZE")
-	{	
+	{
 		// read in the color value
 		getline(cin, value);
-	
+
 		// converts string to Upper Case
 		value = stringToUpper(value);
 
@@ -435,7 +443,7 @@ Color promptForColor(const string& message)
 		{
 			color = SILVER;
 			break;
-		}		
+		}
 		else if (value == "BRONZE")
 		{
 			color = BRONZE;
@@ -454,13 +462,13 @@ Color promptForColor(const string& message)
 // Search for a trophy in the collection by name
 // compares the user inputted name, to current name
 // in the search 
-int searchForTrophy(vector<Trophy>& trophy, string& name)
+int searchForTrophy(vector<Trophy*>& trophy, string& name)
 {
 	// Finds the trophy in the collection by its name
 	for (int i = 0; i < trophy.size(); i++)
 	{
 		// returns the trophies position if names matches
-		if (trophy[i].getName() == name)
+		if (trophy[i]->getName() == name)
 		{
 			return i;
 		}

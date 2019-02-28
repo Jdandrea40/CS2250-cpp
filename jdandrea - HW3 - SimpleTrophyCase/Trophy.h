@@ -19,6 +19,7 @@ class Trophy
 {
 public:
 	Trophy();
+	Trophy(const Trophy& trophy);
 	Trophy(const std::string& name, int& level, Color color);
 	~Trophy();
 	Trophy& operator=(const Trophy& trophy);
