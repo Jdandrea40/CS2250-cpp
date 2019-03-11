@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Trophy.h"
+#include <vld.h>
 using namespace std;
 
 // Reusable strings

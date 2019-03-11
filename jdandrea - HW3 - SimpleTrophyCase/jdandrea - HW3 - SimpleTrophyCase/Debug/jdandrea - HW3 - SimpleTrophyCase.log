@@ -1,10 +1,10 @@
 ﻿  main.cpp
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(119): warning C4101: 'e': unreferenced local variable
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(313): warning C4018: '<': signed/unsigned mismatch
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(374): warning C4101: 'e': unreferenced local variable
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(390): warning C4101: 'e': unreferenced local variable
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(405): warning C4018: '<': signed/unsigned mismatch
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(468): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(120): warning C4101: 'e': unreferenced local variable
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(314): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(375): warning C4101: 'e': unreferenced local variable
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(391): warning C4101: 'e': unreferenced local variable
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(406): warning C4018: '<': signed/unsigned mismatch
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw3 - simpletrophycase\main.cpp(469): warning C4018: '<': signed/unsigned mismatch
   Trophy.cpp
   Generating Code...
   jdandrea - HW3 - SimpleTrophyCase.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW3 - SimpleTrophyCase\Debug\jdandrea - HW3 - SimpleTrophyCase.exe
