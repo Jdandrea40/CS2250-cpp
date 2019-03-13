@@ -23,6 +23,13 @@ public:
 	Trophy(const std::string& name, int& level, Color color);
 	~Trophy();
 	Trophy& operator=(const Trophy& trophy);
+	//const Trophy& operator< (const Trophy& trophy);
+	//const Trophy& operator> (const Trophy& trophy);
+	//const Trophy& operator== (const Trophy& trophy);
+	//const Trophy& operator!= (const Trophy& trophy);
+	//const Trophy& operator<= (const Trophy& trophy);
+	//const Trophy& operator>= (const Trophy& trophy);
+	friend ostream& operator<< (ostream& sout,const Trophy& trophy);
 	std::string getName();
 	int getLevel();
 	Color getColor();

@@ -331,7 +331,7 @@ void printTrophies(vector<TrophyCase>& trophyCases)
 	{
 		cout << "#############################################" << endl;
 		cout << "TrophyCase " << i + 1 << ":" << endl;
-		//cout << trophyCases[i];
+		cout << trophyCases[i];
 		cout << "#############################################" << endl;
 	}
 }

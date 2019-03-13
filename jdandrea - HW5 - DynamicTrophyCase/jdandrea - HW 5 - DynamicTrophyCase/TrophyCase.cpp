@@ -1,6 +1,7 @@
 #include "TrophyCase.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -19,11 +20,13 @@ TrophyCase::TrophyCase(const TrophyCase& trophy)
 	m_capacity = trophy.getAllocatedSize();
 
 }
+// Assignment operator
 TrophyCase& TrophyCase::operator=(const TrophyCase& trophy)
 {
 	*m_trophyCase = *trophy.m_trophyCase;
 	return *this;
 }
+// Destructor
 TrophyCase::~TrophyCase()
 {
 	delete [] m_trophyCase;
@@ -32,11 +35,6 @@ TrophyCase::~TrophyCase()
 }
 int TrophyCase::getNbrOfTrophies() const
 {
-	//int size;
-	//for (int i = 0; i < m_size; i++)
-	//{
-	//	++size;
-	//}
 	return m_size;
 }
 int TrophyCase::getAllocatedSize() const
@@ -48,11 +46,10 @@ Trophy TrophyCase::addTrophy(const string& name, int level, Color color)
 	Trophy* newTrophy = new Trophy(name, level, color);
 	for (int i = 0; i < m_capacity; i++)
 	{
-		if (m_trophyCase != nullptr)
+		if (m_trophyCase == nullptr)
 		{
 			*m_trophyCase[i] = *newTrophy;
 			++m_size;
-
 		}
 	}
 	return *newTrophy;
@@ -129,12 +126,12 @@ bool TrophyCase::recolorTrophy(const string& name, Color& color)
 	}
 	return false;
 }
-ostream& operator<< (ostream& sout, Trophy& trophy)
+ostream& operator<< (ostream& sout, const TrophyCase& trophyCase)
 {
-	sout << trophy.getName() << " " << trophy.getLevel() << " " << trophy.getColor();
+	for (int i = 0; i < trophyCase.getNbrOfTrophies(); i++)
+	{
+		sout << *trophyCase.m_trophyCase[i];
+		sout << "\n";
+	}
 	return sout;
 }
-/*istream& operator>>(istream& sin, Trophy& trophy)
-{
-
-}*/

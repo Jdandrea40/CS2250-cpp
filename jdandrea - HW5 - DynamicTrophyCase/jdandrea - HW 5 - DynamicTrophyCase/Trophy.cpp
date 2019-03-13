@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -108,4 +109,53 @@ void Trophy::printTrophies()
 		break;
 	}
 	}
+}
+//const Trophy& Trophy::operator< (const Trophy& trophy)
+//{
+//
+//}
+//const Trophy& Trophy::operator> (const Trophy& trophy)
+//{
+//
+//}
+//const Trophy& Trophy::operator== (const Trophy& trophy)
+//{
+//
+//}
+//const Trophy& Trophy::operator!= (const Trophy& trophy)
+//{
+//
+//}
+//const Trophy& Trophy::operator<= (const Trophy& trophy)
+//{
+//
+//}
+//const Trophy& Trophy::operator>= (const Trophy& trophy)
+//{
+//
+//}
+ostream& operator<< (ostream& sout, const Trophy& trophy)
+{
+	sout << "[ " << left << setw(30) << *trophy.getName << " : " << *trophy.getLevel << " : ";
+	switch (*trophy.getColor)
+	{
+	case GOLD:
+	{
+		sout << setw(6) << "GOLD  ]";
+		break;
+	}
+	// SILVER trophy printing
+	case SILVER:
+	{
+		sout << setw(6) << "SILVER  ]";
+		break;
+	}
+	// Bronze trophy printing
+	case BRONZE:
+	{
+		sout << setw(6) << "BRONZE  ]";
+		break;
+	}
+	}
+	return sout;
 }

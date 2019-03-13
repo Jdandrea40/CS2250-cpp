@@ -14,8 +14,7 @@ public:
 	TrophyCase(const TrophyCase& trophy);
 	~TrophyCase();
 	TrophyCase& operator=(const TrophyCase& trophy);
-	friend ostream& operator<< (ostream& sout, const Trophy& trophy);
-	//friend istream& operator>>(istream& sin, Trophy& trophy);
+	friend ostream& operator<< (ostream& sout,const TrophyCase& trophyCase);
 	int getNbrOfTrophies() const;
 	int getAllocatedSize() const;
 	Trophy addTrophy(const string& name, int level, Color color);
