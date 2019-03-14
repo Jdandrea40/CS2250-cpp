@@ -13,12 +13,14 @@ public:
 	TrophyCase();
 	TrophyCase(const TrophyCase& trophy);
 	~TrophyCase();
-	TrophyCase& operator=(const TrophyCase& trophy);
+	TrophyCase& operator=(const TrophyCase& trophyCase);
 	friend ostream& operator<< (ostream& sout,const TrophyCase& trophyCase);
 	int getNbrOfTrophies() const;
 	int getAllocatedSize() const;
 	int searchForTrophy(const string& name);
 	void addTrophy(const string& name, int level, Color color);
+	void expandCase();
+	void sortTrophies();
 	bool copyTrophy(const string& name);
 	bool deleteTrophy(const string& name);
 	bool renameTrophy(const string& name, const string& newName);
