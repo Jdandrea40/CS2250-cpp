@@ -15,10 +15,9 @@ TrophyCase::TrophyCase()
 // Copy Constructor
 TrophyCase::TrophyCase(const TrophyCase& trophy)
 {
-	m_trophyCase = new Trophy*[trophy.getAllocatedSize()];
 	m_size = trophy.getNbrOfTrophies();
 	m_capacity = trophy.getAllocatedSize();
-
+	m_trophyCase = new Trophy*[m_capacity];
 }
 // Assignment operator
 TrophyCase& TrophyCase::operator=(const TrophyCase& trophy)
