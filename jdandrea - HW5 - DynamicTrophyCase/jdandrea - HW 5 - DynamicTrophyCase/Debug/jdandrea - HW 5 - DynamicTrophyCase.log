@@ -1,2 +1,6 @@
 ﻿  Trophy.cpp
+  TrophyCase.cpp
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw5 - dynamictrophycase\jdandrea - hw 5 - dynamictrophycase\trophycase.cpp(101): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw5 - dynamictrophycase\jdandrea - hw 5 - dynamictrophycase\trophy.cpp(174): warning C4715: 'Trophy::compareTrophy': not all control paths return a value
   jdandrea - HW 5 - DynamicTrophyCase.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW5 - DynamicTrophyCase\Debug\jdandrea - HW 5 - DynamicTrophyCase.exe

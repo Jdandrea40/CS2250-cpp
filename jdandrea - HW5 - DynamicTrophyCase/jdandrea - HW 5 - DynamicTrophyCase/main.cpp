@@ -1,9 +1,9 @@
+#include <vld.h>
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include "TrophyCase.h"
-#include "vld.h"
-
 using namespace std;
 
 // Numerical Contants

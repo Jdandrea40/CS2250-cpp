@@ -23,7 +23,7 @@ Trophy::Trophy(const Trophy& trophy)
 
 }
 // Trophy Constructor
-Trophy::Trophy(const string& name, int& level, Color color)
+Trophy::Trophy(const string& name, int level, Color color)
 {
 	m_name = new string(name);
 	m_level = new int(level);
@@ -75,7 +75,7 @@ void Trophy::setName(const string& name)
 	*m_name = name;
 }
 // Sets the level of the trophy
-void Trophy::setLevel(int& level)
+void Trophy::setLevel(int level)
 {
 	*m_level = level;
 }
@@ -94,11 +94,11 @@ void Trophy::printTrophies()
 	case GOLD:
 		cout << "[ " << *m_name << " : " << *m_level << " :  GOLD  ]" << endl;
 		break;
-	// SILVER trophy printing
+		// SILVER trophy printing
 	case SILVER:
 		cout << "[ " << *m_name << " : " << *m_level << " :  SILVER  ]" << endl;
 		break;
-	// Bronze trophy printing
+		// Bronze trophy printing
 	case BRONZE:
 		cout << "[ " << *m_name << " : " << *m_level << " :  BRONZE  ]" << endl;
 		break;
@@ -109,19 +109,19 @@ void Trophy::printTrophies()
 // returns the ostream sout
 ostream& operator<< (ostream& sout, const Trophy& trophy)
 {
-	sout << "[ " << left << setw(30) << *trophy.m_name << " : " << setw(2) << *trophy.m_level << " : ";
+	sout << "[ " << left << setw(30) << *trophy.m_name << " : " << right << setw(2) << *trophy.m_level << left << " : ";
 	// case statemt for checking trophy color
 	switch (*trophy.m_color)
 	{
-	// GOLD trphy printing
+		// GOLD trophy printing
 	case GOLD:
 		sout << setw(6) << "GOLD";
 		break;
-	// SILVER trophy printing
+		// SILVER trophy printing
 	case SILVER:
 		sout << setw(6) << "SILVER";
 		break;
-	// Bronze trophy printing
+		// Bronze trophy printing
 	case BRONZE:
 		sout << setw(6) << "BRONZE";
 		break;
@@ -129,7 +129,10 @@ ostream& operator<< (ostream& sout, const Trophy& trophy)
 	sout << " ]";
 	return sout;
 }
-int Trophy::compareTrophy(const Trophy& trophy)
+// Compares trophies for sorting
+// Level first, then by color (if necessary), then by name (if necessary)
+// returns a value for comparison operator checks
+int Trophy::compareTrophy(const Trophy& trophy) const
 {
 	// Level Comparison
 	if (*m_level > *trophy.m_level)
@@ -141,7 +144,7 @@ int Trophy::compareTrophy(const Trophy& trophy)
 		return -1;
 	}
 	// Color Comparison
-	else
+	else if (*m_level == *trophy.m_level)
 	{
 		if (*m_color > *trophy.m_color)
 		{
@@ -152,24 +155,26 @@ int Trophy::compareTrophy(const Trophy& trophy)
 			return -1;
 		}
 		// Name Comparison
-		else
+		else if (*m_color == *trophy.m_color)
 		{
 			if (*m_name > *trophy.m_name)
 			{
 				return 1;
 			}
-			else if (*m_name > *trophy.m_name)
+			else if (*m_name < *trophy.m_name)
 			{
 				return -1;
 			}
-			else
+			else if (*m_name == *trophy.m_name)
 			{
 				return 0;
 			}
 		}
 	}
 }
-bool Trophy::operator< (const Trophy& trophyB)
+// Comparison Operator Checks, used for trophy sorting (TrophyCase)
+// Less than check
+bool Trophy::operator< (const Trophy& trophyB) const
 {
 	if (compareTrophy(trophyB) < 0)
 	{
@@ -180,7 +185,8 @@ bool Trophy::operator< (const Trophy& trophyB)
 		return false;
 	}
 }
-bool Trophy::operator> (const Trophy& trophyB)
+// greater than check
+bool Trophy::operator> (const Trophy& trophyB) const
 {
 	if (compareTrophy(trophyB) > 0)
 	{
@@ -191,7 +197,8 @@ bool Trophy::operator> (const Trophy& trophyB)
 		return false;
 	}
 }
-bool Trophy::operator== (const Trophy& trophyB)
+// equal to check
+bool Trophy::operator== (const Trophy& trophyB) const
 {
 	if (compareTrophy(trophyB) == 0)
 	{
@@ -202,7 +209,8 @@ bool Trophy::operator== (const Trophy& trophyB)
 		return false;
 	}
 }
-bool Trophy::operator!= (const Trophy& trophyB)
+// not equal to check
+bool Trophy::operator!= (const Trophy& trophyB) const
 {
 	if (compareTrophy(trophyB) != 0)
 	{
@@ -213,7 +221,8 @@ bool Trophy::operator!= (const Trophy& trophyB)
 		return false;
 	}
 }
-bool Trophy::operator<= (const Trophy& trophyB)
+// less than or equal to check
+bool Trophy::operator<= (const Trophy& trophyB) const
 {
 	if (compareTrophy(trophyB) <= 0)
 	{
@@ -224,7 +233,8 @@ bool Trophy::operator<= (const Trophy& trophyB)
 		return false;
 	}
 }
-bool Trophy::operator>= (const Trophy& trophyB)
+// greater than or equal to check
+bool Trophy::operator>= (const Trophy& trophyB) const
 {
 	if (compareTrophy(trophyB) >= 0)
 	{

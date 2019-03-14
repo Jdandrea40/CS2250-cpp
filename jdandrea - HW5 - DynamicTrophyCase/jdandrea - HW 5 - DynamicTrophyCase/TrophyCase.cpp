@@ -19,6 +19,7 @@ TrophyCase::TrophyCase(const TrophyCase& trophy)
 	m_capacity = trophy.getAllocatedSize();
 	m_trophyCase = new Trophy*[m_capacity];
 
+	// Loops through and copies trophies
 	for (int i = 0; i < m_size; i++)
 	{
 		m_trophyCase[i] = new Trophy(*trophy.m_trophyCase[i]);
@@ -27,32 +28,40 @@ TrophyCase::TrophyCase(const TrophyCase& trophy)
 // Assignment operator
 TrophyCase& TrophyCase::operator=(const TrophyCase& trophyCase)
 {
-	for (int i = 0; i < m_size; ++i)
+	// Self Assignment protection
+	if (this != &trophyCase)
 	{
-		delete m_trophyCase[i];
+		// Loops through and deletes all data
+		// in case
+		for (int i = 0; i < m_size; ++i)
+		{
+			delete m_trophyCase[i];
+		}
+
+		// delete the array, and creates a new one
+		delete[] m_trophyCase;
+		m_size = trophyCase.getNbrOfTrophies();
+		m_capacity = trophyCase.getAllocatedSize();
+		m_trophyCase = new Trophy*[m_capacity];
+
+		// copies the trophies into a new array
+		for (int i = 0; i < m_size; i++)
+		{
+			m_trophyCase[i] = new Trophy(*trophyCase.m_trophyCase[i]);
+		}
 	}
-
-	delete[] m_trophyCase;
-	m_size = trophyCase.getNbrOfTrophies();
-	m_capacity = trophyCase.getAllocatedSize();
-	m_trophyCase = new Trophy*[m_capacity];
-
-
-	for (int i = 0; i < m_size; i++)
-	{
-		m_trophyCase[i] = new Trophy(*trophyCase.m_trophyCase[i]);
-	}
-
 	return *this;
 }
 // Destructor
 TrophyCase::~TrophyCase()
 {
+	// loops through and deletes all values
 	for (int i = 0; i < m_size; i++)
 	{
 		delete m_trophyCase[i];
 		m_trophyCase[i] = nullptr;
 	}
+	// deletes the array
 	delete m_trophyCase;
 	m_trophyCase = NULL;
 }
@@ -71,25 +80,33 @@ int TrophyCase::getAllocatedSize() const
 // Adds a new trophy to the case
 void TrophyCase::addTrophy(const string& name, int level, Color color)
 {
+	// creation of a new trophy
 	Trophy* newTrophy = new Trophy(name, level, color);
+	// expands if necessary
 	if (m_size >= m_capacity)
 	{
 		expandCase();
 	}
-
+	// adds the new trophy to the array
+	// increments the size
+	// then sorts
 	m_trophyCase[m_size] = newTrophy;
-	++m_size;	
+	++m_size;
 	sortTrophies();
 }
 // Dynamically expands the size of the trophy case
 void TrophyCase::expandCase()
 {
-	m_capacity++;
+	// expands the capacity by 10%
+	m_capacity = m_capacity * 1.1;
+	// storage of the array for dynamic expansion
 	Trophy** tempCase = new Trophy*[m_capacity];
+	// copies old values into temp array
 	for (int i = 0; i < m_size; i++)
 	{
 		tempCase[i] = m_trophyCase[i];
 	}
+	// deletes old array and adds old values to new array
 	delete[] m_trophyCase;
 	m_trophyCase = tempCase;
 }
@@ -97,6 +114,9 @@ void TrophyCase::expandCase()
 // returns its position
 int TrophyCase::searchForTrophy(const string& name)
 {
+	// loops through array and compares name given, to current
+	// trophy name
+	// returns its position
 	for (int i = 0; i < m_size; i++)
 	{
 		if (m_trophyCase[i]->getName() == name)
@@ -112,13 +132,16 @@ int TrophyCase::searchForTrophy(const string& name)
 bool TrophyCase::copyTrophy(const string& name)
 {
 	int trophyPosition = searchForTrophy(name);
+	// if the returned value is an acutal position
 	if (trophyPosition > -1)
 	{
+		// expand if necessary
 		if (m_size >= m_capacity)
 		{
 			expandCase();
 		}
-		Trophy* newTrophy = m_trophyCase[trophyPosition];
+		// copy that trophy into the array, increment size, and sort
+		Trophy* newTrophy = new Trophy(*m_trophyCase[trophyPosition]);
 		m_trophyCase[m_size] = newTrophy;
 		++m_size;
 		sortTrophies();
@@ -135,19 +158,19 @@ bool TrophyCase::copyTrophy(const string& name)
 bool TrophyCase::deleteTrophy(const string& name)
 {
 	int trophyPosition = searchForTrophy(name);
-
+	// if the returned value is an acutal position
 	if (trophyPosition > -1)
 	{
+		// delete that trophy
 		delete m_trophyCase[trophyPosition];
 		m_trophyCase[trophyPosition] = NULL;
-
+		// backfill if necessary
 		for (int i = trophyPosition; i < m_size; i++)
 		{
 			m_trophyCase[i] = m_trophyCase[i + 1];
 		}
-
+		// decrement the size
 		--m_size;
-
 
 		return true;
 	}
@@ -162,8 +185,11 @@ bool TrophyCase::deleteTrophy(const string& name)
 bool TrophyCase::renameTrophy(const string& name, const string& newName)
 {
 	int trophyPosition = searchForTrophy(name);
+	// if the returned value is an acutal position
 	if (trophyPosition > -1)
 	{
+		// set the current name to new name
+		// resort the trophies
 		m_trophyCase[trophyPosition]->setName(newName);
 		sortTrophies();
 		return true;
@@ -177,11 +203,14 @@ bool TrophyCase::renameTrophy(const string& name, const string& newName)
 // Relevels trophies
 // returns true if done
 // else false
-bool TrophyCase::relevelTrophy(const string& name, int& level)
+bool TrophyCase::relevelTrophy(const string& name, int level)
 {
 	int trophyPosition = searchForTrophy(name);
+	// if the returned value is an acutal position
 	if (trophyPosition > -1)
 	{
+		// set the new name
+		// resort trophies
 		m_trophyCase[trophyPosition]->setLevel(level);
 		sortTrophies();
 		return true;
@@ -194,11 +223,14 @@ bool TrophyCase::relevelTrophy(const string& name, int& level)
 // Recolors Trophies
 // returns true if done
 // else false
-bool TrophyCase::recolorTrophy(const string& name, Color& color)
+bool TrophyCase::recolorTrophy(const string& name, Color color)
 {
 	int trophyPosition = searchForTrophy(name);
+	// if the returned value is an acutal position
 	if (trophyPosition > -1)
 	{
+		// set the new color
+		// resort
 		m_trophyCase[trophyPosition]->setColor(color);
 		sortTrophies();
 		return true;
@@ -213,13 +245,17 @@ bool TrophyCase::recolorTrophy(const string& name, Color& color)
 // using color for same leveled trophies
 void TrophyCase::sortTrophies()
 {
+	// Bubble Sort
 	for (int i = 0; i < m_size - 1; i++)
 	{
 		for (int j = 0; j < m_size - i - 1; j++)
 		{
+			// checks if current is greater than the next
 			if (*m_trophyCase[j] > *m_trophyCase[j + 1])
 			{
+				// temporary trophy holder
 				Trophy temp = *m_trophyCase[j];
+				// swaps the trophy positions
 				*m_trophyCase[j] = *m_trophyCase[j + 1];
 				*m_trophyCase[j + 1] = temp;
 			}
