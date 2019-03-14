@@ -23,7 +23,17 @@ TrophyCase::TrophyCase(const TrophyCase& trophy)
 // Assignment operator
 TrophyCase& TrophyCase::operator=(const TrophyCase& trophy)
 {
-	*m_trophyCase = *trophy.m_trophyCase;
+	if (this != &trophy)
+	{
+		delete[] m_trophyCase;
+
+		m_trophyCase = new Trophy*[trophy.getAllocatedSize()];
+
+		for (int i = 0; i < trophy.getAllocatedSize(); ++i)
+		{
+			*m_trophyCase[i] = *trophy.m_trophyCase[i];
+		}
+	}
 	return *this;
 }
 // Destructor
@@ -31,7 +41,6 @@ TrophyCase::~TrophyCase()
 {
 	delete [] m_trophyCase;
 	m_trophyCase = NULL;
-
 }
 int TrophyCase::getNbrOfTrophies() const
 {
@@ -41,91 +50,122 @@ int TrophyCase::getAllocatedSize() const
 {
 	return m_capacity;
 }
-Trophy TrophyCase::addTrophy(const string& name, int level, Color color)
+void TrophyCase::addTrophy(const string& name, int level, Color color)
 {
 	Trophy* newTrophy = new Trophy(name, level, color);
-	for (int i = 0; i < m_capacity; i++)
+	if (m_size >= m_capacity)
 	{
-		if (m_trophyCase == nullptr)
+		// Expand
+	}
+	m_trophyCase[m_size] = newTrophy;
+	++m_size;
+}
+// Searches for a trophy
+// returns its position
+int TrophyCase::searchForTrophy(const string& name)
+{
+	for (int i = 0; i < m_size; i++)
+	{
+		if (m_trophyCase[i]->getName() == name)
 		{
-			*m_trophyCase[i] = *newTrophy;
-			++m_size;
+			return i;
 		}
 	}
-	return *newTrophy;
+	return -1;
 }
+// Copies a Trophy
+// returns true if done
+// else false
 bool TrophyCase::copyTrophy(const string& name)
 {
-	string currName;
-	for (int i = 0; i < m_size; i++)
+	int trophyPosition = searchForTrophy(name);
+	if (trophyPosition > -1)
 	{
-		currName = m_trophyCase[i]->getName();
-		if (currName == name)
+		if (m_size >= m_capacity)
 		{
-			return true;
+			// Expand
 		}
+		Trophy* newTrophy = m_trophyCase[trophyPosition];
+		m_trophyCase[m_size] = newTrophy;
+		++m_size;
+		return true;
 	}
-	
-	return false;
+	else
+	{
+		return false;
+	}
 }
+// Deletes a trophy
+// returns true if done
+// else false
 bool TrophyCase::deleteTrophy(const string& name)
 {
-	string currName;
-	for (int i = 0; i < m_size; i++)
-	{
-		currName = m_trophyCase[i]->getName();
-		if (currName == name)
-		{
-			delete m_trophyCase[i];
-			m_trophyCase[i] = nullptr;
+	int trophyPosition = searchForTrophy(name);
 
-			return true;
-		}
+	if (trophyPosition > -1)
+	{
+		delete m_trophyCase[trophyPosition];
+		m_trophyCase[trophyPosition] = nullptr;
+
+		return true;
 	}
-	return false;
+	else
+	{
+		return false;
+	}
+
 }
+// Renames Trophies
+// returns true if done
+// else false
 bool TrophyCase::renameTrophy(const string& name, const string& newName)
 {
-	string currName;
-	for (int i = 0; i < m_size; i++)
+	int trophyPosition = searchForTrophy(name);
+	if (trophyPosition > -1)
 	{
-		currName = m_trophyCase[i]->getName();
-		if (currName == name)
-		{
-			m_trophyCase[i]->setName(newName);
-			return true;
-		}
+		m_trophyCase[trophyPosition]->setName(newName);
+		return true;
 	}
-	return false;
+	else
+	{
+		return false;
+	}
+
 }
+// Relevels trophies
+// returns true if done
+// else false
 bool TrophyCase::relevelTrophy(const string& name, int& level)
 {
-	string currName;
-	for (int i = 0; i < m_size; i++)
+	int trophyPosition = searchForTrophy(name);
+	if (trophyPosition > -1)
 	{
-		currName = m_trophyCase[i]->getName();
-		if (currName == name)
-		{
-			m_trophyCase[i]->setLevel(level);
-			return true;
-		}
+		m_trophyCase[trophyPosition]->setLevel(level);
+		return true;
 	}
-	return false;
+	else
+	{
+		return false;
+	}
 }
+// Recolors Trophies
+// returns true if done
+// else false
 bool TrophyCase::recolorTrophy(const string& name, Color& color)
 {
-	string currName;
-	for (int i = 0; i < m_size; i++)
+	int trophyPosition = searchForTrophy(name);
+	if (trophyPosition > -1)
 	{
-		currName = m_trophyCase[i]->getName();
-		if (currName == name)
-		{
-			m_trophyCase[i]->setColor(color);
-			return true;
-		}
+		m_trophyCase[trophyPosition]->setColor(color);
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 	return false;
 }
+
 ostream& operator<< (ostream& sout, const TrophyCase& trophyCase)
 {
 	for (int i = 0; i < trophyCase.getNbrOfTrophies(); i++)

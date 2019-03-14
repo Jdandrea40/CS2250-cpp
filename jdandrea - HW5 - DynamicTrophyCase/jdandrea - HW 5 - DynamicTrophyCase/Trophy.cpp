@@ -85,31 +85,31 @@ void Trophy::setColor(Color color)
 	*m_color = color;
 }
 // Prints the trophies
-void Trophy::printTrophies()
-{
-	// Switches what is printed based on the enumeration of the trophy
-	switch (*m_color)
-	{
-		// GOLD trophy printing
-	case GOLD:
-	{
-		cout << "[ " << *m_name << " : " << *m_level << " :  GOLD  ]" << endl;
-		break;
-	}
-	// SILVER trophy printing
-	case SILVER:
-	{
-		cout << "[ " << *m_name << " : " << *m_level << " :  SILVER  ]" << endl;
-		break;
-	}
-	// Bronze trophy printing
-	case BRONZE:
-	{
-		cout << "[ " << *m_name << " : " << *m_level << " :  BRONZE  ]" << endl;
-		break;
-	}
-	}
-}
+//void Trophy::printTrophies()
+//{
+//	// Switches what is printed based on the enumeration of the trophy
+//	switch (*m_color)
+//	{
+//		// GOLD trophy printing
+//	case GOLD:
+//	{
+//		cout << "[ " << *m_name << " : " << *m_level << " :  GOLD  ]" << endl;
+//		break;
+//	}
+//	// SILVER trophy printing
+//	case SILVER:
+//	{
+//		cout << "[ " << *m_name << " : " << *m_level << " :  SILVER  ]" << endl;
+//		break;
+//	}
+//	// Bronze trophy printing
+//	case BRONZE:
+//	{
+//		cout << "[ " << *m_name << " : " << *m_level << " :  BRONZE  ]" << endl;
+//		break;
+//	}
+//	}
+//}
 //const Trophy& Trophy::operator< (const Trophy& trophy)
 //{
 //
@@ -136,26 +136,20 @@ void Trophy::printTrophies()
 //}
 ostream& operator<< (ostream& sout, const Trophy& trophy)
 {
-	sout << "[ " << left << setw(30) << *trophy.getName << " : " << *trophy.getLevel << " : ";
-	switch (*trophy.getColor)
+	sout << "[ " << left << setw(30) << *trophy.m_name << " : " << *trophy.m_level << " : ";
+	switch (*trophy.m_color)
 	{
 	case GOLD:
-	{
-		sout << setw(6) << "GOLD  ]";
+		sout << setw(6) << "GOLD ]";
 		break;
-	}
 	// SILVER trophy printing
 	case SILVER:
-	{
-		sout << setw(6) << "SILVER  ]";
+		sout << setw(6) << "SILVER ]";
 		break;
-	}
 	// Bronze trophy printing
 	case BRONZE:
-	{
-		sout << setw(6) << "BRONZE  ]";
+		sout << setw(6) << "BRONZE ]";
 		break;
-	}
 	}
 	return sout;
 }

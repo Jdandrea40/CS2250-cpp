@@ -17,7 +17,8 @@ public:
 	friend ostream& operator<< (ostream& sout,const TrophyCase& trophyCase);
 	int getNbrOfTrophies() const;
 	int getAllocatedSize() const;
-	Trophy addTrophy(const string& name, int level, Color color);
+	int searchForTrophy(const string& name);
+	void addTrophy(const string& name, int level, Color color);
 	bool copyTrophy(const string& name);
 	bool deleteTrophy(const string& name);
 	bool renameTrophy(const string& name, const string& newName);

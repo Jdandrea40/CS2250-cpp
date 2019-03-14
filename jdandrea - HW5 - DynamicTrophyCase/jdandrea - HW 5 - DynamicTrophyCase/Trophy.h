@@ -5,6 +5,9 @@
 // include the libraries this class will need
 #include <string>
 #include <vector>
+#include <iostream>
+
+using namespace std;
 
 // enumerations of trophy colors
 enum Color
@@ -30,16 +33,16 @@ public:
 	//const Trophy& operator<= (const Trophy& trophy);
 	//const Trophy& operator>= (const Trophy& trophy);
 	friend ostream& operator<< (ostream& sout,const Trophy& trophy);
-	std::string getName();
+	string getName();
 	int getLevel();
 	Color getColor();
-	void setName(const std::string& name);
+	void setName(const string& name);
 	void setLevel(int& level);
 	void setColor(Color color);
 	void printTrophies();
 
 private:
-	std::string* m_name;
+	string* m_name;
 	int* m_level;
 	Color* m_color;
 
