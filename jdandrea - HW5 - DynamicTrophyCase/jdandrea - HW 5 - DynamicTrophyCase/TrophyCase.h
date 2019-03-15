@@ -13,7 +13,7 @@ public:
 	TrophyCase();
 	TrophyCase(const TrophyCase& trophy);
 	~TrophyCase();
-	TrophyCase& operator=(const TrophyCase& trophyCase);
+	TrophyCase operator=(const TrophyCase& trophyCase);
 	friend ostream& operator<< (ostream& sout, const TrophyCase& trophyCase);
 	int getNbrOfTrophies() const;
 	int getAllocatedSize() const;

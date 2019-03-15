@@ -28,7 +28,6 @@ Trophy::Trophy(const string& name, int level, Color color)
 	m_name = new string(name);
 	m_level = new int(level);
 	m_color = new Color(color);
-
 }
 
 // Trophy Assignment Operator

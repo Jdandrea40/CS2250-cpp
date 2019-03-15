@@ -26,7 +26,7 @@ TrophyCase::TrophyCase(const TrophyCase& trophy)
 	}
 }
 // Assignment operator
-TrophyCase& TrophyCase::operator=(const TrophyCase& trophyCase)
+TrophyCase TrophyCase::operator=(const TrophyCase& trophyCase)
 {
 	// Self Assignment protection
 	if (this != &trophyCase)
@@ -170,7 +170,11 @@ bool TrophyCase::deleteTrophy(const string& name)
 			m_trophyCase[i] = m_trophyCase[i + 1];
 		}
 		// decrement the size
+		// and set the outside range value to null
 		--m_size;
+		m_trophyCase[m_size] = nullptr;
+
+		
 
 		return true;
 	}
