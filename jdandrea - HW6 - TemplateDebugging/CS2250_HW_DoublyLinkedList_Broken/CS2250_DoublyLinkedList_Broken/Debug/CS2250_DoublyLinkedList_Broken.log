@@ -1,3 +1,5 @@
 ﻿  DoublyLinkedList.cpp
+  DoublyLinkedListNode.cpp
+  Generating Code...
 DoublyLinkedList.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-  CS2250_DoublyLinkedList_Broken.vcxproj -> C:\Users\jdand\Desktop\CS 2250 - C++\CS2250_HW_DoublyLinkedList_Broken\CS2250_HW_DoublyLinkedList_Broken\Debug\CS2250_DoublyLinkedList_Broken.lib
+  CS2250_DoublyLinkedList_Broken.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW6 - TemplateDebugging\CS2250_HW_DoublyLinkedList_Broken\Debug\CS2250_DoublyLinkedList_Broken.lib

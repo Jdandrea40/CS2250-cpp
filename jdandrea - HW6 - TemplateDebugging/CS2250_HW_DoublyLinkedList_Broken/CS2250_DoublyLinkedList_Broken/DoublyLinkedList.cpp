@@ -19,22 +19,30 @@ DoublyLinkedList<T>::DoublyLinkedList()
 template <class T>
 DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList<T>& list)
 {
-	m_head = new DoublyLinkedListNode<T>(*list.m_head);
-	
-	DoublyLinkedListNode<T>* next = list.m_head->GetNext();
-	DoublyLinkedListNode<T>* curr = m_head;
+	DoublyLinkedListNode<T>* curr = list.m_head;
+	m_head = nullptr;
+	DoublyLinkedListNode<T>* temp = nullptr;
 
-	while (next != NULL)
+	// if the current node has a value
+	if (curr != nullptr)
 	{
-		curr->SetNext(new DoublyLinkedListNode<T>(*next));
-
+		// set the the head to that value
+		// then move to next value
+		m_head = new DoublyLinkedListNode<T>(curr->GetData());
+		temp = m_head;
 		curr = curr->GetNext();
-		next = next->GetNext();
 	}
-
-	curr->SetNext(NULL);
-	m_tail = curr;
-
+	// so long as there is a value
+	while (curr != nullptr)
+	{
+		// copy values and iterate though
+		temp->SetNext(new DoublyLinkedListNode<T>(curr->GetData()));
+		temp->GetNext()->SetPrev(temp);
+		temp = temp->GetNext();
+		curr = curr->GetNext();
+	}
+	// sets tail to temp, and sets the count
+	m_tail = temp;
 	m_count = list.m_count;
 }
 
@@ -45,16 +53,20 @@ DoublyLinkedList<T>::~DoublyLinkedList()
 {
 	if (m_head != NULL)
 	{
-		DoublyLinkedListNode<T>* curr = m_head->GetNext();;
-
+		DoublyLinkedListNode<T>* curr = m_head->GetNext();
+		// so long as there is a value left
 		while (curr != NULL)
 		{
+			// delete the head
 			delete m_head;
+			// set head to new position
 			m_head = curr;
+			// move curr to next value
 			curr = curr->GetNext();
+			// decrement the count
 			--m_count;
 		}
-
+		// Delete the final values
 		delete m_head;
 		delete curr;
 		m_head = NULL;
@@ -76,7 +88,6 @@ void DoublyLinkedList<T>::AddFront(T item)
 		// Connect the new node to the front of the list
 		newNode->SetNext(m_head);
 		m_head->SetPrev(newNode);
-
 	}
 	else
 	{
