@@ -16,14 +16,46 @@ BinaryTree::BinaryTree(bool isAVL)
 // Relies on Node's delete method.
 BinaryTree::~BinaryTree(void)
 {
-	// TODO: Add your code here
+	// Calls Recursive function 
+	// to clear the roots leaves
+	MakeEmpty(root);
+	
+	// deletes the Left and Right Nodes
+	delete root->GetLeft();
+	delete root->GetRight();
+
+	// deltes the root
+	delete root;
+	root = NULL;
 }
 
 // MakeEmpty
 // Recurses the entire tree, 
 void BinaryTree::MakeEmpty(BinaryTreeNode* curr)
 {
-	// TODO: Add your code here
+	// checks the current node for data
+	if (curr == NULL)
+	{
+		return;
+	}
+	// If there is data
+	else
+	{
+		// Recursivly clear the left had side
+		if (curr->GetLeft() != NULL)
+		{
+			MakeEmpty(curr->GetLeft());
+		}
+		// Recursively clear the right hand side
+		if (curr->GetRight() != NULL)
+		{
+			MakeEmpty(curr->GetRight());
+		}
+
+		// Set the data to NULL
+		curr->SetLeft(NULL);
+		curr->SetRight(NULL);
+	}
 }
 
 /////////////////////////////////////////////////////////////////
@@ -36,7 +68,18 @@ void BinaryTree::MakeEmpty(BinaryTreeNode* curr)
 // Otherwise, uses the private insert to recursively insert.
 void BinaryTree::Insert(const string& item)
 {
-	// TODO: Add your code here
+	// sets the root to the item
+	// if the Tree is empty
+	if (root == NULL)
+	{
+		root = new BinaryTreeNode(item);
+	}
+	// Or calls recursive function
+	// to insert the next item
+	else
+	{
+		Insert(item, root);
+	}
 }
 
 // Insert
@@ -47,7 +90,35 @@ void BinaryTree::Insert(const string& item)
 // the node is added as a child of this node.
 void BinaryTree::Insert(const string& item, BinaryTreeNode* curr)
 {
-	// TODO: Add your code here
+	// Smaller items get set to left side of tree
+	if (item < curr->GetData())
+	{
+		// if there is no left node
+		if (curr->GetLeft() == NULL)
+		{
+			// set the next node to item
+			curr->SetLeft(new BinaryTreeNode(item));
+		}
+		// Recursively check tree for proper location
+		else
+		{
+			Insert(item, curr->GetLeft());
+		}
+	}
+	// Larger items = right hand side of tree
+	else if (item > curr->GetData())
+	{
+		// If right node is empty -> Set it to item
+		if (curr->GetRight() == NULL)
+		{
+			curr->SetRight(new BinaryTreeNode(item));
+		}
+		// Recursively check tree for proper location
+		else
+		{
+			Insert(item, curr->GetRight());
+		}
+	}
 }
 
 /////////////////////////////////////////////////////////////////
@@ -60,9 +131,16 @@ void BinaryTree::Insert(const string& item, BinaryTreeNode* curr)
 // FALSE if the tree is empty or if the item is not found.
 bool BinaryTree::Search(const string& item) const
 {
-	// TODO: Add your code here
-
-	return false;
+	// tree is empty
+	if (root == NULL)
+	{
+		return false;
+	}
+	// recursive search function call
+	else
+	{
+		return Search(item, root);
+	}
 }
 
 // Search
@@ -74,9 +152,32 @@ bool BinaryTree::Search(const string& item) const
 // Returns TRUE if the item is found, FALSE if not. 
 bool BinaryTree::Search(const string& item, BinaryTreeNode* curr) const
 {
-	// TODO: Add your code here
-
-	return false;
+	// the item was not found
+	if (curr == NULL)
+	{
+		return false;
+	}
+	// item is less than current node
+	// move left
+	if (item < curr->GetData())
+	{
+		return Search(item, curr->GetLeft());
+	}
+	// item was greater than current
+	// move right
+	else if (item > curr->GetData())
+	{
+		return Search(item, curr->GetRight());
+	}
+	// item was found
+	else if (item == curr->GetData())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /////////////////////////////////////////////////////////////////
