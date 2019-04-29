@@ -117,8 +117,6 @@ void TestTree(string test, string nodes[], int nbrNodes, string output[], bool i
 	cout << endl;
 }
 
-// TODO: Once you've added templates, uncomment this code
-/*
 ////////////////////////////////////////////////////////////////////////////////
 // Template Tests
 // Uncomment this portion of the file to test your templated BinaryTree on ints
@@ -199,7 +197,7 @@ void TestTemplatedTree(string test, int size, bool isAVL = false)
 	delete tree;
 	cout << endl;
 }
-*/
+
 
 void RunTests()
 {

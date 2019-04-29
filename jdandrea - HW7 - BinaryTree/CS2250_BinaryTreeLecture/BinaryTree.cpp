@@ -274,54 +274,70 @@ bool BinaryTree<T>::Remove(const T& item, BinaryTreeNode<T>* curr)
 template <class T>
 BinaryTreeNode<T>* BinaryTree<T>::RemoveNode(BinaryTreeNode<T>* curr)
 {
+	// If there are no leaves, delete the current node
 	if (curr->GetLeft() == NULL && curr->GetRight() == NULL)
 	{	
 		delete curr;
 		return NULL;
 	}
+	// checks for a single branch off of found node
 	else if (curr->GetLeft() == NULL || curr->GetRight() == NULL)
 	{
+		// If there is no Left Branch
 		if (curr->GetLeft() == NULL)
 		{
+			// bring up the next Right Leaf
 			BinaryTreeNode<T>* temp = curr->GetRight();
 			delete curr;
 			return temp;
 		}
+		// No Right branch
 		else
 		{
+			// bring up the next left leaf
 			BinaryTreeNode<T>* temp = curr->GetLeft();
 			delete curr;
 			return temp;
 		}
 	}
+	// Two Child branches
+	// Get the right value, then iterate to the lowest
+	// left value and replace curr with that value
 	else if (curr->GetRight() != NULL)
 	{
+		// Placeholders for tree restructuring
 		BinaryTreeNode<T>* minimum = curr;
 		BinaryTreeNode<T>* parent = curr;
 		BinaryTreeNode<T>* temp = curr;
 		temp = temp->GetRight();
 
+		// No left branch, bring up right leaf
 		if (temp->GetLeft() == NULL)
 		{
 			parent = temp;
 		}
 		minimum = temp;
 
+		// iterate through to find minimum value
+		// of left branch
 		while (temp->GetLeft() != NULL)
 		{	
 			parent = minimum;
 			minimum = minimum->GetLeft();
 			temp = temp->GetLeft();
 		}
-
+		// sets curr to minimum value
 		curr->SetData(minimum->GetData());
 
+		// iterate through to find minimum right value
 		if (minimum->GetRight() != NULL)
 		{
+			// sets the parent node to the found Min value
 			parent->SetLeft(minimum->GetRight());
 		}
 		else
 		{
+			// sets to null of no value is in right position
 			parent->SetLeft(NULL);
 		}
 
@@ -330,6 +346,9 @@ BinaryTreeNode<T>* BinaryTree<T>::RemoveNode(BinaryTreeNode<T>* curr)
 			curr->SetRight(minimum->GetRight());
 		}
 
+		// removes the minimum valued node
+		// and sets to NULL after moving to new
+		// location
 		minimum->SetLeft(NULL);
 		minimum->SetRight(NULL);
 		RemoveNode(minimum);

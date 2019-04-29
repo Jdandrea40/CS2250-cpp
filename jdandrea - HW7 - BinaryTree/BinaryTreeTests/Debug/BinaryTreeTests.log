@@ -1,11 +1,13 @@
-﻿  AVLTreeInsertTests.cpp
-  AVLTreeRebalancingTests.cpp
+﻿  stdafx.cpp
+  AVLTreeInsertTests.cpp
   AVLTreeRemovalTests.cpp
   AVLTreeSearchTests.cpp
-  TreeInsertTests.cpp
   TreeRemovalTests.cpp
+  AVLTreeRebalancingTests.cpp
+  TreeInsertTests.cpp
   TreeSearchTests.cpp
   Generating Code...
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw7 - binarytree\cs2250_binarytreelecture\binarytree.cpp(338): warning C4715: 'BinaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::RemoveNode': not all control paths return a value
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw7 - binarytree\cs2250_binarytreelecture\binarytree.cpp(338): warning C4715: 'BinaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::RemoveNode': not all control paths return a value
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw7 - binarytree\cs2250_binarytreelecture\binarytree.cpp(357): warning C4715: 'BinaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::RemoveNode': not all control paths return a value
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw7 - binarytree\cs2250_binarytreelecture\binarytree.cpp(357): warning C4715: 'BinaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::RemoveNode': not all control paths return a value
+     Creating library C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW7 - BinaryTree\Debug\BinaryTreeTests.lib and object C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW7 - BinaryTree\Debug\BinaryTreeTests.exp
   BinaryTreeTests.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW7 - BinaryTree\Debug\BinaryTreeTests.dll
