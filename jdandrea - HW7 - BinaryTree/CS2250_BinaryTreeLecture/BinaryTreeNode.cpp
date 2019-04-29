@@ -84,7 +84,7 @@ BinaryTreeNode<T>* BinaryTreeNode<T>::GetRight() const
 // GetData
 // Returns the data associated with the node
 template <class T>
-BinaryTreeNode<T> BinaryTreeNode<T>::GetData() const
+T BinaryTreeNode<T>::GetData() const
 {
 	return data;
 }
@@ -92,7 +92,7 @@ BinaryTreeNode<T> BinaryTreeNode<T>::GetData() const
 // GetHeight
 // Returns the height of the node
 template <class T>
-BinaryTreeNode<T> BinaryTreeNode<T>::GetHeight() const
+int BinaryTreeNode<T>::GetHeight() const
 {
 	return height;
 }

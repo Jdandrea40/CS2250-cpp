@@ -22,8 +22,8 @@ public:
 
 	BinaryTreeNode<T>* GetLeft() const;
 	BinaryTreeNode<T>* GetRight() const;
-	BinaryTreeNode<T> GetData() const;
-	BinaryTreeNode<T> GetHeight() const;
+	T GetData() const;
+	int GetHeight() const;
 
 	// Mutators
 	void SetLeft(BinaryTreeNode<T>* left);
