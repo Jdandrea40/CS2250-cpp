@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(357): warning C4715: 'BinaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::RemoveNode': not all control paths return a value
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(357): warning C4715: 'BinaryTree<int>::RemoveNode': not all control paths return a value
+  BinaryTreeMain.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW8 - AVLTree\Debug\BinaryTreeMain.exe
