@@ -378,16 +378,38 @@ BinaryTreeNode<T>* BinaryTree<T>::RemoveNode(BinaryTreeNode<T>* curr)
 template <class T>
 bool BinaryTree<T>::NeedsRebalancing(BinaryTreeNode<T>* curr)
 {
-	// TODO: Add your code here for week 2
-	int leftHeight = curr->GetLeft()->GetHeight();
-	int rightHeight = curr->GetRight()->GetHeight();
+	int leftHeight;
+	int rightHeight;
 
+	// sets leftHeight to the height of left branch
+	if (curr->GetLeft() != NULL)
+	{
+		leftHeight = curr->GetLeft()->GetHeight();
+	}
+	else
+	{
+		// if null = -1
+		leftHeight = -1;
+	}
+	// sets rightHeight to height of branch
+	if (curr->GetRight() != NULL)
+	{
+		rightHeight = curr->GetRight()->GetHeight();
+	}
+	else
+	{
+		// null = -1
+		rightHeight = -1;
+	}
+	// Checks the difference in height of both branches
 	if (leftHeight - rightHeight > 1 || rightHeight - leftHeight > 1)
 	{
+		// reblances
 		return true;
 	}
-
+	// does not need rebalance
 	return false;
+	
 }
 
 // RebalanceNode the current node
@@ -398,8 +420,20 @@ bool BinaryTree<T>::NeedsRebalancing(BinaryTreeNode<T>* curr)
 template <class T>
 BinaryTree<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 {
-	// TODO: Add your code here for week 2
+	// LEFT - LEFT
+	if (curr->GetRight() == NULL)
+	{
+		BinaryTreeNode<T>* leftNode = curr->GetLeft();
+		BinaryTreeNode<T>* current = curr;
 
+		leftNode->SetRight(current);
+		delete curr;
+	}
+	// LEFT - RIGHT
+
+	// RIGHT - RIGHT
+
+	// RIGHT - LEFT
 	return NULL;
 }
 
