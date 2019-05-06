@@ -82,6 +82,7 @@ void BinaryTree<T>::Insert(const T& item)
 	{
 		Insert(item, root);
 	}
+
 	if (isAVLTree)
 	{
 		FixHeight(root);
@@ -90,7 +91,6 @@ void BinaryTree<T>::Insert(const T& item)
 			root = RebalanceNode(root);
 			FixHeight(root);
 		}
-		
 	}
 }
 
@@ -133,6 +133,20 @@ void BinaryTree<T>::Insert(const T& item, BinaryTreeNode<T>* curr)
 		}
 	}
 
+	if (isAVLTree)
+	{
+		FixHeight(curr);
+		if (curr->GetRight() != NULL && NeedsRebalancing(curr->GetRight()))
+		{
+			curr->SetRight(RebalanceNode(curr->GetRight()));
+			FixHeight(curr->GetRight());
+		}
+		if (curr->GetLeft() != NULL && NeedsRebalancing(curr->GetLeft()))
+		{
+			curr->SetLeft(RebalanceNode(curr->GetLeft()));
+			FixHeight(curr->GetLeft());
+		}
+	}
 }
 
 /////////////////////////////////////////////////////////////////
@@ -428,7 +442,7 @@ bool BinaryTree<T>::NeedsRebalancing(BinaryTreeNode<T>* curr)
 // is necessary (left-left, right-right, right-left or left-right).
 // Returns the new node that should replace curr in the tree.
 template <class T>
-BinaryTree<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
+BinaryTreeNode<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 {
 	int leftHeight, leftLeftH, leftRightH;
 	int rightHeight, rightLeftH, rightRightH;
@@ -468,11 +482,11 @@ BinaryTree<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 		leftRightH = -1;
 	}
 
-	// Checks for a Left Node
+	// Checks for a Right Node
 	if (curr->GetRight() != NULL)
 	{
 		rightHeight = curr->GetRight()->GetHeight();
-		// Checks for a Left Child of Left Node
+		// Checks for a Left Child of Right Node
 		if (curr->GetRight()->GetLeft() != NULL)
 		{
 			// gets its height
@@ -483,7 +497,7 @@ BinaryTree<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 			// NO CHILD -> -1
 			rightLeftH = -1;
 		}
-		// Checks for a Right Child of left node
+		// Checks for a Right Child of Right node
 		if (curr->GetRight()->GetRight() != NULL)
 		{
 			// sets its height
@@ -502,32 +516,66 @@ BinaryTree<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 		rightLeftH = -1;
 		rightRightH = -1;
 	}
-	// LEFT - LEFT
 
-
-	// LEFT - RIGHT
-
-	// RIGHT - RIGHT
-
-	// RIGHT - LEFT
-	return NULL;
+	if (leftHeight > rightHeight)
+	{
+		// LEFT - LEFT
+		if (leftLeftH > leftRightH)
+		{
+			return RotateRight(curr);
+		}
+		// LEFT - RIGHT
+		if (leftLeftH < leftRightH)
+		{
+			curr->SetLeft(RotateLeft(curr->GetLeft()));
+			return RotateRight(curr);
+		}
+	}
+	else if (rightHeight > leftHeight)
+	{
+		// RIGHT - RIGHT
+		if (rightRightH > rightLeftH)
+		{
+			return RotateLeft(curr);
+		}
+		// RIGHT - LEFT
+		if (rightRightH < rightLeftH)
+		{
+			curr->SetRight(RotateRight(curr->GetRight()));
+			return RotateLeft(curr);
+		}
+	}
+	else
+	{
+		return curr;
+	}
+		return NULL;
+		
 }
 // Used for left rotations
 template <class T>
-BinaryTree<T>* BinaryTree<T>::RotateLeft(BinaryTreeNode<T>* curr)
+BinaryTreeNode<T>* BinaryTree<T>::RotateLeft(BinaryTreeNode<T>* curr)
 {
 	// Gets the left and right children of the current node
 	BinaryTreeNode<T>* rightChild = curr->GetRight();
-	BinaryTreeNode<T>* leftChild = curr->GetLeft();
+	BinaryTreeNode<T>* rightLeftChild;
 
+	if (rightChild != nullptr)
+	{
+		rightLeftChild = rightChild->GetLeft();
+	}
+	else
+	{
+		rightLeftChild = nullptr;
+	}
 	// sets curr to the new left subtree of the right child
 	rightChild->SetLeft(curr);
 	// sets curr new right subtree to the original left subtree
-	curr->SetRight(rightChild);
+	curr->SetRight(rightLeftChild);
 	
 	// Fixes the heights after rotation
 	FixHeight(curr);
-	FixHeight(rightRightC);
+	FixHeight(rightLeftChild);
 
 	// returns the new node
 	return rightChild;
@@ -535,20 +583,27 @@ BinaryTree<T>* BinaryTree<T>::RotateLeft(BinaryTreeNode<T>* curr)
 
 // Method for right rotations
 template <class T>
-BinaryTree<T>* BinaryTree<T>::RotateRight(BinaryTreeNode<T>* curr)
+BinaryTreeNode<T>* BinaryTree<T>::RotateRight(BinaryTreeNode<T>* curr)
 {
 	// gets the left and right children of curr
 	BinaryTreeNode<T>* leftChild = curr->GetLeft();
-	BinaryTreeNode<T>* rightChild = curr->GetRight();
-
-	// sets curr to the new left subtree
-	leftChild->SetLeft(curr);
-	// sets currs new right subtree
-	curr->SetRight(rightChild);
+	BinaryTreeNode<T>* leftRightChild;
+	if (leftChild != nullptr)
+	{
+		leftRightChild = leftChild->GetRight();
+	}
+	else
+	{
+		leftRightChild = nullptr;
+	}
+	// sets curr to the new right subtree
+	leftChild->SetRight(curr);
+	// sets currs new left subtree
+	curr->SetLeft(leftRightChild);
 
 	// fixes the heights after rotation
 	FixHeight(curr);
-	FixHeight(leftLeftC);
+	FixHeight(leftRightChild);
 	
 	// returns the new node after rotation
 	return leftChild;
@@ -574,7 +629,7 @@ void BinaryTree<T>::FixHeight(BinaryTreeNode<T>* curr)
 	{
 		// no child = height is -1
 		// that way when node is added,  the height will be 0
-		leftHeight() = -1;
+		leftHeight = -1;
 	}
 	// checks if there is a right child
 	if (curr->GetRight() != NULL)

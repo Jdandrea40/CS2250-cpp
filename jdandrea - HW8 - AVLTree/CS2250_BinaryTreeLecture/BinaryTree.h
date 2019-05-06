@@ -43,10 +43,10 @@ private:
 	BinaryTreeNode<T>* RemoveNode(BinaryTreeNode<T>* curr);
 
 	bool NeedsRebalancing(BinaryTreeNode<T>* curr);
-	BinaryTree<T>* RebalanceNode(BinaryTreeNode<T>* curr);
+	BinaryTreeNode<T>* RebalanceNode(BinaryTreeNode<T>* curr);
 	void FixHeight(BinaryTreeNode<T>* curr);
-	BinaryTree<T>* RotateLeft(BinaryTreeNode<T>* curr);
-	BinaryTree<T>* RotateRight(BinaryTreeNode<T>* curr);
+	BinaryTreeNode<T>* RotateLeft(BinaryTreeNode<T>* curr);
+	BinaryTreeNode<T>* RotateRight(BinaryTreeNode<T>* curr);
 	
 	void MakeEmpty(BinaryTreeNode<T>* curr);
 

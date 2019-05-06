@@ -1,35 +1,4 @@
 ﻿  main.cpp
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(90): error C2440: '=': cannot convert from 'BinaryTree<std::string> *' to 'BinaryTreeNode<T> *'
-          with
-          [
-              T=std::string
-          ]
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(90): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(72): note: while compiling class template member function 'void BinaryTree<std::string>::Insert(const T &)'
-          with
-          [
-              T=std::string
-          ]
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\main.cpp(62): note: see reference to function template instantiation 'void BinaryTree<std::string>::Insert(const T &)' being compiled
-          with
-          [
-              T=std::string
-          ]
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\main.cpp(51): note: see reference to class template instantiation 'BinaryTree<std::string>' being compiled
-c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(90): error C2440: '=': cannot convert from 'BinaryTree<int> *' to 'BinaryTreeNode<T> *'
-          with
-          [
-              T=int
-          ]
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(90): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(72): note: while compiling class template member function 'void BinaryTree<int>::Insert(const T &)'
-          with
-          [
-              T=int
-          ]
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\main.cpp(145): note: see reference to function template instantiation 'void BinaryTree<int>::Insert(const T &)' being compiled
-          with
-          [
-              T=int
-          ]
-  c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\main.cpp(127): note: see reference to class template instantiation 'BinaryTree<int>' being compiled
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(382): warning C4715: 'BinaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::RemoveNode': not all control paths return a value
+c:\users\jdand\documents\github\cs2250-cpp\jdandrea - hw8 - avltree\cs2250_binarytreelecture\binarytree.cpp(382): warning C4715: 'BinaryTree<int>::RemoveNode': not all control paths return a value
+  BinaryTreeMain.vcxproj -> C:\Users\jdand\Documents\GitHub\CS2250-cpp\jdandrea - HW8 - AVLTree\Debug\BinaryTreeMain.exe
