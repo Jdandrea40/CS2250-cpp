@@ -45,6 +45,8 @@ private:
 	bool NeedsRebalancing(BinaryTreeNode<T>* curr);
 	BinaryTree<T>* RebalanceNode(BinaryTreeNode<T>* curr);
 	void FixHeight(BinaryTreeNode<T>* curr);
+	BinaryTree<T>* RotateLeft(BinaryTreeNode<T>* curr);
+	BinaryTree<T>* RotateRight(BinaryTreeNode<T>* curr);
 	
 	void MakeEmpty(BinaryTreeNode<T>* curr);
 

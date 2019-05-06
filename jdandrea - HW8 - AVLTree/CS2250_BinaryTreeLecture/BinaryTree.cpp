@@ -82,6 +82,16 @@ void BinaryTree<T>::Insert(const T& item)
 	{
 		Insert(item, root);
 	}
+	if (isAVLTree)
+	{
+		FixHeight(root);
+		if (NeedsRebalancing(root))
+		{
+			root = RebalanceNode(root);
+			FixHeight(root);
+		}
+		
+	}
 }
 
 // Insert
@@ -122,6 +132,7 @@ void BinaryTree<T>::Insert(const T& item, BinaryTreeNode<T>* curr)
 			Insert(item, curr->GetRight());
 		}
 	}
+
 }
 
 /////////////////////////////////////////////////////////////////
@@ -378,8 +389,7 @@ BinaryTreeNode<T>* BinaryTree<T>::RemoveNode(BinaryTreeNode<T>* curr)
 template <class T>
 bool BinaryTree<T>::NeedsRebalancing(BinaryTreeNode<T>* curr)
 {
-	int leftHeight;
-	int rightHeight;
+	int leftHeight, rightHeight;
 
 	// sets leftHeight to the height of left branch
 	if (curr->GetLeft() != NULL)
@@ -404,7 +414,7 @@ bool BinaryTree<T>::NeedsRebalancing(BinaryTreeNode<T>* curr)
 	// Checks the difference in height of both branches
 	if (leftHeight - rightHeight > 1 || rightHeight - leftHeight > 1)
 	{
-		// reblances
+		// rebalances
 		return true;
 	}
 	// does not need rebalance
@@ -420,21 +430,128 @@ bool BinaryTree<T>::NeedsRebalancing(BinaryTreeNode<T>* curr)
 template <class T>
 BinaryTree<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 {
-	// LEFT - LEFT
-	if (curr->GetRight() == NULL)
-	{
-		BinaryTreeNode<T>* leftNode = curr->GetLeft();
-		BinaryTreeNode<T>* current = curr;
+	int leftHeight, leftLeftH, leftRightH;
+	int rightHeight, rightLeftH, rightRightH;
 
-		leftNode->SetRight(current);
-		delete curr;
+	// Checks for a Left Node
+	if (curr->GetLeft() != NULL)
+	{
+		leftHeight = curr->GetLeft()->GetHeight();
+		// Checks for a Left Child of Left Node
+		if (curr->GetLeft()->GetLeft() != NULL)
+		{
+			// gets its height
+			leftLeftH = curr->GetLeft()->GetLeft()->GetHeight();
+		}
+		else
+		{
+			// NO CHILD -> -1
+			leftLeftH = -1;
+		}
+		// Checks for a Right Child of left node
+		if (curr->GetLeft()->GetRight() != NULL)
+		{
+			// sets its height
+			leftRightH = curr->GetLeft()->GetRight()->GetHeight();
+		}
+		else
+		{
+			// NO CHILD -> -1
+			leftRightH = -1;
+		}
 	}
+	// If no left node, all values = -1
+	else
+	{
+		leftHeight = -1;
+		leftLeftH = -1;
+		leftRightH = -1;
+	}
+
+	// Checks for a Left Node
+	if (curr->GetRight() != NULL)
+	{
+		rightHeight = curr->GetRight()->GetHeight();
+		// Checks for a Left Child of Left Node
+		if (curr->GetRight()->GetLeft() != NULL)
+		{
+			// gets its height
+			rightLeftH = curr->GetRight()->GetLeft()->GetHeight();
+		}
+		else
+		{
+			// NO CHILD -> -1
+			rightLeftH = -1;
+		}
+		// Checks for a Right Child of left node
+		if (curr->GetRight()->GetRight() != NULL)
+		{
+			// sets its height
+			rightRightH = curr->GetRight()->GetRight()->GetHeight();
+		}
+		else
+		{
+			// NO CHILD -> -1
+			rightRightH = -1;
+		}
+	}
+	// If no left node, all values = -1
+	else
+	{
+		rightHeight = -1;
+		rightLeftH = -1;
+		rightRightH = -1;
+	}
+	// LEFT - LEFT
+
+
 	// LEFT - RIGHT
 
 	// RIGHT - RIGHT
 
 	// RIGHT - LEFT
 	return NULL;
+}
+// Used for left rotations
+template <class T>
+BinaryTree<T>* BinaryTree<T>::RotateLeft(BinaryTreeNode<T>* curr)
+{
+	// Gets the left and right children of the current node
+	BinaryTreeNode<T>* rightChild = curr->GetRight();
+	BinaryTreeNode<T>* leftChild = curr->GetLeft();
+
+	// sets curr to the new left subtree of the right child
+	rightChild->SetLeft(curr);
+	// sets curr new right subtree to the original left subtree
+	curr->SetRight(rightChild);
+	
+	// Fixes the heights after rotation
+	FixHeight(curr);
+	FixHeight(rightRightC);
+
+	// returns the new node
+	return rightChild;
+}
+
+// Method for right rotations
+template <class T>
+BinaryTree<T>* BinaryTree<T>::RotateRight(BinaryTreeNode<T>* curr)
+{
+	// gets the left and right children of curr
+	BinaryTreeNode<T>* leftChild = curr->GetLeft();
+	BinaryTreeNode<T>* rightChild = curr->GetRight();
+
+	// sets curr to the new left subtree
+	leftChild->SetLeft(curr);
+	// sets currs new right subtree
+	curr->SetRight(rightChild);
+
+	// fixes the heights after rotation
+	FixHeight(curr);
+	FixHeight(leftLeftC);
+	
+	// returns the new node after rotation
+	return leftChild;
 }
 
 // FixHeight
