@@ -83,6 +83,7 @@ void BinaryTree<T>::Insert(const T& item)
 		Insert(item, root);
 	}
 
+	// AVL tree check (testing only)
 	if (isAVLTree)
 	{
 		FixHeight(root);
@@ -133,6 +134,7 @@ void BinaryTree<T>::Insert(const T& item, BinaryTreeNode<T>* curr)
 		}
 	}
 
+	// AVL tree check (testing only)
 	if (isAVLTree)
 	{
 		FixHeight(curr);
@@ -517,6 +519,7 @@ BinaryTreeNode<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 		rightRightH = -1;
 	}
 
+	// LEFT SIDE INBALANCES
 	if (leftHeight > rightHeight)
 	{
 		// LEFT - LEFT
@@ -531,6 +534,7 @@ BinaryTreeNode<T>* BinaryTree<T>::RebalanceNode(BinaryTreeNode<T>* curr)
 			return RotateRight(curr);
 		}
 	}
+	// RIGHT SIDE INBALANCES
 	else if (rightHeight > leftHeight)
 	{
 		// RIGHT - RIGHT
@@ -560,13 +564,13 @@ BinaryTreeNode<T>* BinaryTree<T>::RotateLeft(BinaryTreeNode<T>* curr)
 	BinaryTreeNode<T>* rightChild = curr->GetRight();
 	BinaryTreeNode<T>* rightLeftChild;
 
-	if (rightChild != nullptr)
+	if (curr != NULL)
 	{
 		rightLeftChild = rightChild->GetLeft();
 	}
 	else
 	{
-		rightLeftChild = nullptr;
+		rightLeftChild = NULL;
 	}
 	// sets curr to the new left subtree of the right child
 	rightChild->SetLeft(curr);
@@ -588,13 +592,13 @@ BinaryTreeNode<T>* BinaryTree<T>::RotateRight(BinaryTreeNode<T>* curr)
 	// gets the left and right children of curr
 	BinaryTreeNode<T>* leftChild = curr->GetLeft();
 	BinaryTreeNode<T>* leftRightChild;
-	if (leftChild != nullptr)
+	if (curr != NULL)
 	{
 		leftRightChild = leftChild->GetRight();
 	}
 	else
 	{
-		leftRightChild = nullptr;
+		leftRightChild = NULL;
 	}
 	// sets curr to the new right subtree
 	leftChild->SetRight(curr);
@@ -618,41 +622,44 @@ void BinaryTree<T>::FixHeight(BinaryTreeNode<T>* curr)
 	// height of the left and right nodes
 	int leftHeight;
 	int rightHeight;
+	if (curr != NULL)
+	{
+		// checks if there is an existing left child
+		if (curr->GetLeft() != NULL)
+		{
+			// if true, gets it height
+			leftHeight = curr->GetLeft()->GetHeight();
+		}
+		else
+		{
+			// no child = height is -1
+			// that way when node is added,  the height will be 0
+			leftHeight = -1;
+		}
+		// checks if there is a right child
+		if (curr->GetRight() != NULL)
+		{
+			// gets the height if true
+			rightHeight = curr->GetRight()->GetHeight();
+		}
+		else
+		{
+			// no child -> height is -1
+			rightHeight = -1;
+		}
 
-	// checks if there is an existing left child
-	if (curr->GetLeft() != NULL)
-	{
-		// if true, gets it height
-		leftHeight = curr->GetLeft()->GetHeight();
-	}
-	else
-	{
-		// no child = height is -1
-		// that way when node is added,  the height will be 0
-		leftHeight = -1;
-	}
-	// checks if there is a right child
-	if (curr->GetRight() != NULL)
-	{
-		// gets the height if true
-		rightHeight = curr->GetRight()->GetHeight();
-	}
-	else
-	{
-		// no child -> height is -1
-		rightHeight = -1;
-	}
 
-	// checks whether the heights of left is greater than right
-	if (leftHeight > rightHeight)
-	{
-		// if true, adds 1 to lefts height
-		curr->SetHeight(leftHeight + 1);
-	}
-	else
-	{
-		// else adds 1 to right height
-		curr->SetHeight(rightHeight + 1);
+		// checks whether the heights of left is greater than right
+		if (leftHeight > rightHeight)
+		{
+			// if true, adds 1 to lefts height
+			curr->SetHeight(leftHeight + 1);
+		}
+		else
+		{
+			// else adds 1 to right height
+			curr->SetHeight(rightHeight + 1);
+		}
 	}
 }
 
